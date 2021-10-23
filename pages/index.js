@@ -10,7 +10,7 @@ const Page = () => {
     <Layout>
       <Container>
         <Box>
-            <Image src={'/images/logo_1200.png'}/>
+            <Image src={`/images/logo_1200${useColorModeValue('', '_inverted')}.png`}/>
         </Box>
         <Box borderRadius="lg" bg={useColorModeValue('whiteAlpha.500')} p={3} mb={6} align="center">
           {'Hello I am a software development enthusiast based in Estonia'}

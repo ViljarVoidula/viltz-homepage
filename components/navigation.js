@@ -49,9 +49,9 @@ const Navigation = props => {
                   <NextLink href="/work">
                     <MenuItem as={Link}> Work </MenuItem>
                   </NextLink>
-                  <NextLink href="/blog">
+                  {/* <NextLink href="/blog">
                     <MenuItem as={Link}> Blog </MenuItem>
-                  </NextLink>
+                  </NextLink> */}
                 </MenuList>
               }
             </Menu>
