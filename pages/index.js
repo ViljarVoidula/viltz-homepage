@@ -44,7 +44,7 @@ const Page = () => {
             Who am I?{' '}
           </Heading>
           <Paragraph>
-            {`"I have worked in various positions in the IT field for the past 10 years. My passion is building digital products and services from the design/planning stage all the way to the actual implementation. I'm most experienced with using the Javascript and Node.js ecosystem to build real-time APIs. What separates me from my competition is the fact that I have a deep understanding of the software development processes and best practices involved.`}
+            {`I have worked in various positions in the IT field for the past 10 years. My passion is building digital products and services from the design/planning stage all the way to the actual implementation. I'm most experienced with using the Javascript and Node.js ecosystem to build real-time APIs. What separates me from my competition is the fact that I have a deep understanding of the software development processes and best practices involved.`}
             {/* <NextLink href="/work"><Link>Portfolio</Link></NextLink> */}
           </Paragraph>
           <Box align="center" my={4}>
