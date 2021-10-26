@@ -44,9 +44,7 @@ const Page = () => {
             Who am I?{' '}
           </Heading>
           <Paragraph>
-            {`I'm an experienced engineer and development manager based in Tallinn Estonia. I have worked in various positions in the IT field past 10 years.
-         I have a passion for building digital products and services from planning to implementation of the product later. I'm most experienced within Javascript and Node.js ecosystem while building real-time APIs. 
-         What makes me is unique from my competition is the fact that I have a very wide grasp of technical aspects from infrastructure to low-level software development specifics.`}
+            {`"I have worked in various positions in the IT field for the past 10 years. My passion is building digital products and services end-to-end - from the design/planning stage all the way to the actual implementation. I'm most experienced with using the Javascript and Node.js ecosystem to build real-time APIs. What separates me from my competition is the fact that I have a deep understanding of the software development processes and best practices involved.`}
             {/* <NextLink href="/work"><Link>Portfolio</Link></NextLink> */}
           </Paragraph>
           <Box align="center" my={4}>
