@@ -13,14 +13,14 @@ const Page = () => {
             <Image src={`/images/logo_1200${useColorModeValue('', '_inverted')}.png`}/>
         </Box>
         <Box borderRadius="lg" bg={useColorModeValue('whiteAlpha.500')} p={3} mb={6} align="center">
-          {'Hello I am a software development enthusiast based in Estonia'}
+          {'Hello, I am a software development enthusiast based in Estonia'}
         </Box>
         <Box display={{ md: 'flex' }}>
           <Box flexGrow={1}>
             <Heading as="h2" variant="page-title">
               Viljar Võidula
             </Heading>
-            <p>Digital craftsman ( Architect/Developer/QA )</p>
+            <p>Digital artisan ( Architect/Developer/QA )</p>
           </Box>
           <Box flexShrink={0} mt={{ base: 4, md: 0 }} ml={{ md: 6 }} align="center">
             <Image
@@ -44,9 +44,9 @@ const Page = () => {
             Who am I?{' '}
           </Heading>
           <Paragraph>
-            {`I'm experienced engineer and development manager based in Tallinn Estonia. I have worked in various positions in the IT field past 10 years.
-         I have passion for building digital products and services from planning to implementation of the product later. I'm most experienced within Javascript and Node.js ecosystem while building realtime API's. 
-         What makes me is unique from my competition is the fact that I have very wide grap of technical aspects from infrastrcture to low level software development specifics.`}
+            {`I'm an experienced engineer and development manager based in Tallinn Estonia. I have worked in various positions in the IT field past 10 years.
+         I have a passion for building digital products and services from planning to implementation of the product later. I'm most experienced within Javascript and Node.js ecosystem while building real-time APIs. 
+         What makes me is unique from my competition is the fact that I have a very wide grasp of technical aspects from infrastructure to low-level software development specifics.`}
             {/* <NextLink href="/work"><Link>Portfolio</Link></NextLink> */}
           </Paragraph>
           <Box align="center" my={4}>
@@ -71,7 +71,7 @@ const Page = () => {
             <BioYear>2011</BioYear>Started working as Network monitoring Administrator in Elion Ettevõtted AS
           </BioSection>
           <BioSection>
-            <BioYear>2012</BioYear>Started working as Software testing expert in TV department of Telia Estonia
+            <BioYear>2012</BioYear>Started working as a Software testing expert in the TV department of Telia Estonia
           </BioSection>
           <BioSection>
             <BioYear>2012</BioYear>
