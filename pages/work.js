@@ -10,7 +10,7 @@ const Work = () => {
       </Heading>
       <SimpleGrid columns={[1, 1, 2]} gap={6}>
         <Section>
-          <WorkGridItem id="gamestreams" title="Gamestreams" thumbnail={`/images/work/ConnectedTV.jpg`}>
+          <WorkGridItem id="gamestreams" title="Gamestreams" thumbnail={`/images/work/Gamestreams.png`}>
             Twitch client for LG WebOS
           </WorkGridItem>
         </Section>

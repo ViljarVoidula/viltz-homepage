@@ -7,7 +7,7 @@ export const GridItem = ({ children, href, title, thumbnail }) => {
   return (
     <Box w="100%" align="center">
       <LinkBox cursor="pointer">
-        <Image src={`http://localhost:3030/resize?url=http://localhost:3000${thumbnail}`} alt={title} className="grid-item-thumbnail" placeholder="blur" loading="lazy" />
+        <Image src={`${process.env.OCULARURL}/resize?url=http://${process.env.HOSTNAME}${thumbnail}`} alt={title} className="grid-item-thumbnail" placeholder="blur" loading="lazy" />
         <LinkOverlay href={href} target="_blank">
           <Text mt={2}>{title}</Text>
         </LinkOverlay>
@@ -23,7 +23,7 @@ export const WorkGridItem = ({ children, id, title, thumbnail }) => {
     <Box w="100%" textAlign="center">
       <NextLink href={`/work/${id}`}>
         <LinkBox cursor="pointer">
-          <Image src={`http://localhost:3030/resize?url=http://localhost:3000${thumbnail}`} alt={title} className="grid-item-thumbnail" placeholder="blur" />
+          <Image src={`${process.env.OCULARURL}/resize?url=http://${process.env.HOSTNAME}${thumbnail}`} alt={title} className="grid-item-thumbnail" placeholder="blur" />
           <LinkOverlay href={`/work/${id}`}>
             <Text mt={2} fontSize={20}>
               {title}
