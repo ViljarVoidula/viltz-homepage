@@ -1,16 +1,17 @@
-import { Box, Container, Heading, Image, useColorModeValue, Link, Button } from '@chakra-ui/react';
+import { Box, Container, Heading,  useColorModeValue, Link, Button } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import Section from '../components/section';
 import Paragraph from '../components/paragraph';
 import NextLink from 'next/link';
 import { BioYear, BioSection } from '../components/bio';
 import Layout from '../components/layouts/article';
+import Image from 'next/image'
 const Page = () => {
   return (
     <Layout>
       <Container>
         <Box>
-            <Image src={`/images/logo_1200${useColorModeValue('', '_inverted')}.png`}/>
+            <Image src={`/images/logo_1200${useColorModeValue('', '_inverted')}.png`} loading="lazy" width={1200} height={1044} alt="logo" />
         </Box>
         <Box borderRadius="lg" bg={useColorModeValue('whiteAlpha.500')} p={3} mb={6} align="center">
           {'Hello, I am a software development enthusiast based in Estonia'}

@@ -29,7 +29,7 @@ export default function Project() {
           </ListItem>
         </List>
         {projects[query.work].sampleImages.map(image => (
-          <WorkImage src={`${process.env.OCULARURL}/resize/?url=http://${process.env.HOSTNAME}${image}&fit=inside&width=800&height=600`} alt={projects[query.work].title} key={`${image}`} />
+          <WorkImage src={`${process.env.OCULARURL}/resize/?url=http://${process.env.HOSTNAME}${image}&fit=inside&width=800&height=600`} alt={projects[query.work].title} key={`${image}`}  />
         ))}
         {projects[query.work]?.links?.length ? (
           <>
