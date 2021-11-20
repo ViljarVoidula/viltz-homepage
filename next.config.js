@@ -6,6 +6,6 @@ module.exports = {
     OCULARURL: process.env.OCULARURL
   },
   images:{
-    domains: ['localhost', process.env.HOSTNAME, process.env.OCULARURL],
+    domains: ['localhost','api.ocular-systems.com', 'viltz.ee'],
   }
 };
