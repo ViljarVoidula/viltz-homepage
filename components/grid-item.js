@@ -1,12 +1,11 @@
 import NextLink from 'next/link';
-import { Box, Text, LinkBox, LinkOverlay } from '@chakra-ui/react';
+import { Box, Text, LinkBox, LinkOverlay, Img, Skeleton } from '@chakra-ui/react';
 import { Global } from '@emotion/react';
-import Image from 'next/image';
 export const GridItem = ({ children, href, title, thumbnail }) => {
   return (
     <Box w="100%" align="center">
       <LinkBox cursor="pointer">
-        <Image src={`${process.env.OCULARURL}/resize?url=http://${process.env.HOSTNAME}${thumbnail}`} alt={title} className="grid-item-thumbnail" loading="lazy" width="480" height="320" />
+        <Img src={`${process.env.OCULARURL}/resize?url=http://${process.env.HOSTNAME}${thumbnail}`} alt={title} className="grid-item-thumbnail" loading="lazy" />
         <LinkOverlay href={href} target="_blank">
           <Text mt={2}>{title}</Text>
         </LinkOverlay>
@@ -21,7 +20,13 @@ export const WorkGridItem = ({ children, id, title, thumbnail }) => {
     <Box w="100%" textAlign="center">
       <NextLink href={`/work/${id}`}>
         <LinkBox cursor="pointer">
-          <Image src={`${process.env.OCULARURL}/resize?url=http://${process.env.HOSTNAME}${thumbnail}`} alt={title} className="grid-item-thumbnail" loading="lazy" width="480" height="320" />
+          <Img
+            src={`${process.env.OCULARURL}/resize?url=http://${process.env.HOSTNAME}${thumbnail}`}
+            alt={title}
+            className="grid-item-thumbnail"
+            loading="lazy"
+            fallback={<Skeleton width="480" height="320" isLoaded></Skeleton>}
+          />
           <LinkOverlay href={`/work/${id}`}>
             <Text mt={2} fontSize={20}>
               {title}

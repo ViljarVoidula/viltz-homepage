@@ -29,7 +29,11 @@ export default function Project() {
           </ListItem>
         </List>
         {projects[query.work].sampleImages.map(image => (
-          <WorkImage src={`${process.env.OCULARURL}/resize/?url=http://${process.env.HOSTNAME}${image}&fit=inside&width=800&height=600`} alt={projects[query.work].title} key={`${image}`}  />
+          <WorkImage
+            src={`${process.env.OCULARURL}/resize/?url=http://${process.env.HOSTNAME}${image}&fit=inside&width=800&height=600`}
+            alt={projects[query.work].title}
+            key={`${image}`}
+          />
         ))}
         {projects[query.work]?.links?.length ? (
           <>
@@ -37,7 +41,13 @@ export default function Project() {
               <Center>Media coverage</Center>
             </Heading>
             <UnorderedList my={4}>
-              {projects[query.work]?.links.map((link, i) =>(<ListItem key={i}><Link key={link.url} href={`${link.url}`}>{link.text}</Link></ListItem>))}
+              {projects[query.work]?.links.map((link, i) => (
+                <ListItem key={i}>
+                  <Link key={link.url} href={`${link.url}`}>
+                    {link.text}
+                  </Link>
+                </ListItem>
+              ))}
             </UnorderedList>
           </>
         ) : null}

@@ -1,17 +1,22 @@
-import { Box, Container, Heading,  useColorModeValue, Link, Button } from '@chakra-ui/react';
+import { Box, Container, Heading, useColorModeValue, Link, Button, Img, Skeleton } from '@chakra-ui/react';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import Section from '../components/section';
 import Paragraph from '../components/paragraph';
 import NextLink from 'next/link';
 import { BioYear, BioSection } from '../components/bio';
 import Layout from '../components/layouts/article';
-import Image from 'next/image'
+import Image from 'next/image';
 const Page = () => {
   return (
     <Layout>
       <Container>
         <Box>
-            <Image src={`/images/logo_1200${useColorModeValue('', '_inverted')}.png`} loading="lazy" width={1200} height={1044} alt="logo" />
+          <Img
+            src={`/images/logo_1200${useColorModeValue('', '_inverted')}.png`}
+            loading="lazy"
+            alt="logo"
+            fallback={<Skeleton width="720" height="400" isLoaded></Skeleton>}
+          />
         </Box>
         <Box borderRadius="lg" bg={useColorModeValue('whiteAlpha.500')} p={3} mb={6} align="center">
           {'Hello, I am a software development enthusiast based in Estonia'}
@@ -107,13 +112,13 @@ const Page = () => {
             Books I ♥
           </Heading>
           <Paragraph>
-            <Link href="https://www.amazon.com/Emperors-Handbook-New-Translation-Meditations/dp/0743233832"> {`The Emperor's Handbook`}</Link>, 
-            <Link href="https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition"> {`The Pragmatic Programmer`}</Link>, 
-            <Link href="https://en.wikipedia.org/wiki/The_Innovator%27s_Dilemma"> {`The Innovator's Dilemma`}</Link>, 
+            <Link href="https://www.amazon.com/Emperors-Handbook-New-Translation-Meditations/dp/0743233832"> {`The Emperor's Handbook`}</Link>,
+            <Link href="https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition"> {`The Pragmatic Programmer`}</Link>,
+            <Link href="https://en.wikipedia.org/wiki/The_Innovator%27s_Dilemma"> {`The Innovator's Dilemma`}</Link>,
             <Link href="https://www.amazon.com/Mythical-Man-Month-Software-Engineering-Anniversary/dp/0201835959">
               {` Mythical Man-Month, The: Essays on Software Engineering`}
-            </Link>, 
-            <Link href="https://en.wikipedia.org/wiki/Brave_New_World"> {`Brave New World`}</Link>
+            </Link>
+            ,<Link href="https://en.wikipedia.org/wiki/Brave_New_World"> {`Brave New World`}</Link>
           </Paragraph>
         </Section>
       </Container>
