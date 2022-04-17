@@ -24,8 +24,7 @@ export const WorkGridItem = ({ children, id, title, thumbnail }) => {
             src={`${process.env.OCULAR_URL}/resize?url=https://viltz.ee${thumbnail}`}
             alt={title}
             className="grid-item-thumbnail"
-            loading="lazy"
-            fallback={<Skeleton width="480" height="320" isLoaded></Skeleton>}
+            mt={5}
             fallbackSrc={'/images/tail-spin.svg'}
           />
           <LinkOverlay href={`/work/${id}`}>

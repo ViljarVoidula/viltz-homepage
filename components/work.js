@@ -24,7 +24,7 @@ export const WorkImage = ({ src, alt }) => (
     src={src}
     alt={alt}
     mb={4}
-    loading="eager"
+    // loading="eager"
     // fallback={<Skeleton width="720" height="400" isLoaded></Skeleton>}
     fallbackSrc={'/images/tail-spin.svg'}
   />

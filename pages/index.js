@@ -1,5 +1,5 @@
-import { Box, Container, Heading, useColorModeValue, Link, Button, Img, Skeleton, Image, Icon } from '@chakra-ui/react';
-import { VscGithubInverted, VscGithub } from 'react-icons/vsc';
+import { Box, Container, Heading, useColorModeValue, Link, Button, Image, Icon } from '@chakra-ui/react';
+import { VscGithubInverted } from 'react-icons/vsc';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import Section from '../components/section';
 import Paragraph from '../components/paragraph';
@@ -12,13 +12,7 @@ const Page = () => {
     <Layout>
       <Container>
         <Box>
-          <Image
-            src={`/images/logo_1200${useColorModeValue('', '_inverted')}.png`}
-            loading="lazy"
-            alt="logo"
-            fallback={<Skeleton width="720" height="400" isLoaded></Skeleton>}
-            fallbackSrc={'/images/tail-spin'}
-          />
+          <Image src={`/images/logo_1200${useColorModeValue('', '_inverted')}.png`} loading="lazy" alt="logo" mt={6} fallbackSrc={'/images/tail-spin.svg'} />
         </Box>
         <Box borderRadius="lg" bg={useColorModeValue('whiteAlpha.500')} p={3} mb={6} align="center">
           {'Hello, I am a software development enthusiast based in Estonia'}
@@ -107,9 +101,9 @@ const Page = () => {
         <Section delay={0.36}>
           <Heading as="h3" variant="section-title">
             {' '}
-            What kind of technical skills I have?{' '}
+            My preferred stack{' '}
           </Heading>
-          <Paragraph>Javascript, NodeJS, Rust, Docker, FeathersJS, Godot, K8, Jenkins, Nginx, Ubuntu, MongoDB, Redis, Nats.io, GraphQL</Paragraph>
+          <Paragraph>React, NodeJS, Rust, SQLx, Docker, FeathersJS, Godot, K8, Jenkins, Nginx, Ubuntu, MongoDB, Redis, Nats.io, GraphQL</Paragraph>
           <Box align={'center'} my={4}>
             <Link href="https://github.com/ViljarVoidula">
               <Icon as={VscGithubInverted} w={10} h={10}></Icon>
