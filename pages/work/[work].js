@@ -30,7 +30,7 @@ export default function Project() {
         </List>
         {projects[query.work].sampleImages.map(image => (
           <WorkImage
-            src={`${process.env.OCULARURL}/resize/?url=http://${process.env.HOSTNAME}${image}&fit=inside&width=800&height=600`}
+            src={`${process.env.OCULAR_URL}/resize/?url=http://${process.env.HOSTNAME}${image}&fit=inside&width=800&height=600`}
             alt={projects[query.work].title}
             key={`${image}`}
           />

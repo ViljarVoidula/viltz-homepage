@@ -29,7 +29,7 @@ const Page = () => {
             <p>Digital artisan ( Architect/Developer/QA )</p>
           </Box>
           <Box flexShrink={0} mt={{ base: 4, md: 0 }} ml={{ md: 6 }} align="center">
-            <Image
+            <Img
               // layout='fill'
               // objectFit="cover"
               width={100}
