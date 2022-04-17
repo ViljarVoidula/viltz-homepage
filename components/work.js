@@ -18,7 +18,16 @@ export const Title = ({ children }) => (
 );
 
 export const WorkImage = ({ src, alt }) => (
-  <Image borderRadius="lg" w="full" src={src} alt={alt} mb={4} loading="lazy" fallback={<Skeleton width="720" height="400" isLoaded></Skeleton>} />
+  <Image
+    borderRadius="lg"
+    w="full"
+    src={src}
+    alt={alt}
+    mb={4}
+    loading="eager"
+    // fallback={<Skeleton width="720" height="400" isLoaded></Skeleton>}
+    fallbackSrc={'/images/tail-spin.svg'}
+  />
 );
 
 export const Meta = ({ children }) => (

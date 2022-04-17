@@ -1,21 +1,23 @@
-import { Box, Container, Heading, useColorModeValue, Link, Button, Img, Skeleton } from '@chakra-ui/react';
+import { Box, Container, Heading, useColorModeValue, Link, Button, Img, Skeleton, Image, Icon } from '@chakra-ui/react';
+import { VscGithubInverted, VscGithub } from 'react-icons/vsc';
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import Section from '../components/section';
 import Paragraph from '../components/paragraph';
 import NextLink from 'next/link';
 import { BioYear, BioSection } from '../components/bio';
 import Layout from '../components/layouts/article';
-import Image from 'next/image';
+
 const Page = () => {
   return (
     <Layout>
       <Container>
         <Box>
-          <Img
+          <Image
             src={`/images/logo_1200${useColorModeValue('', '_inverted')}.png`}
             loading="lazy"
             alt="logo"
             fallback={<Skeleton width="720" height="400" isLoaded></Skeleton>}
+            fallbackSrc={'/images/tail-spin'}
           />
         </Box>
         <Box borderRadius="lg" bg={useColorModeValue('whiteAlpha.500')} p={3} mb={6} align="center">
@@ -26,10 +28,11 @@ const Page = () => {
             <Heading as="h2" variant="page-title">
               Viljar Võidula
             </Heading>
-            <p>Digital artisan ( Architect/Developer/QA )</p>
+            <p>Digital artisan ( Architect/Developer/QA )</p>{' '}
           </Box>
+
           <Box flexShrink={0} mt={{ base: 4, md: 0 }} ml={{ md: 6 }} align="center">
-            <Img
+            <Image
               // layout='fill'
               // objectFit="cover"
               width={100}
@@ -41,6 +44,7 @@ const Page = () => {
               display="inline-block"
               borderRadius="full"
               src="/images/viljar.jpg"
+              fallbackSrc={'/images/tail-spin.svg'}
               alt="Profile image"
             />
           </Box>
@@ -106,6 +110,12 @@ const Page = () => {
             What kind of technical skills I have?{' '}
           </Heading>
           <Paragraph>Javascript, NodeJS, Rust, Docker, FeathersJS, Godot, K8, Jenkins, Nginx, Ubuntu, MongoDB, Redis, Nats.io, GraphQL</Paragraph>
+          <Box align={'center'} my={4}>
+            <Link href="https://github.com/ViljarVoidula">
+              <Icon as={VscGithubInverted} w={10} h={10}></Icon>
+              <p>Github</p>
+            </Link>
+          </Box>
         </Section>
         <Section delay={0.48}>
           <Heading as="h3" variant="section-title">

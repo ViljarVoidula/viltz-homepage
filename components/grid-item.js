@@ -1,5 +1,5 @@
 import NextLink from 'next/link';
-import { Box, Text, LinkBox, LinkOverlay, Img, Skeleton } from '@chakra-ui/react';
+import { Box, Text, LinkBox, LinkOverlay, Img, Skeleton, Image } from '@chakra-ui/react';
 import { Global } from '@emotion/react';
 export const GridItem = ({ children, href, title, thumbnail }) => {
   return (
@@ -20,12 +20,13 @@ export const WorkGridItem = ({ children, id, title, thumbnail }) => {
     <Box w="100%" textAlign="center">
       <NextLink href={`/work/${id}`}>
         <LinkBox cursor="pointer">
-          <Img
+          <Image
             src={`${process.env.OCULAR_URL}/resize?url=https://viltz.ee${thumbnail}`}
             alt={title}
             className="grid-item-thumbnail"
             loading="lazy"
             fallback={<Skeleton width="480" height="320" isLoaded></Skeleton>}
+            fallbackSrc={'/images/tail-spin.svg'}
           />
           <LinkOverlay href={`/work/${id}`}>
             <Text mt={2} fontSize={20}>
