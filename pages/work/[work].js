@@ -28,13 +28,9 @@ export default function Project() {
             <span>{projects[query.work].technologies.join(', ')}</span>
           </ListItem>
         </List>
-        {projects[query.work].sampleImages.map(image => (
-          <WorkImage
-            src={`${process.env.OCULAR_URL}/resize/?url=https://viltz.ee${image}&fit=inside&width=800&height=600`}
-            alt={projects[query.work].title}
-            key={`${image}`}
-          />
-        ))}
+        {projects[query.work].sampleImages.map(image => {
+          return <WorkImage src={`https://testreel-1.ams3.digitaloceanspaces.com/viltz.ee${image}`} alt={projects[query.work].title} key={`${image}`} />;
+        })}
         {projects[query.work]?.links?.length ? (
           <>
             <Heading as="h4" fontSize={16} my={6}>

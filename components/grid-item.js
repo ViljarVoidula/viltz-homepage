@@ -2,10 +2,11 @@ import NextLink from 'next/link';
 import { Box, Text, LinkBox, LinkOverlay, Img, Skeleton, Image } from '@chakra-ui/react';
 import { Global } from '@emotion/react';
 export const GridItem = ({ children, href, title, thumbnail }) => {
+  console.log('Thumb: ', thumbnail);
   return (
     <Box w="100%" align="center">
       <LinkBox cursor="pointer">
-        <Img src={`${process.env.OCULAR_URL}/resize?url=https://viltz.ee${thumbnail}`} alt={title} className="grid-item-thumbnail" loading="lazy" />
+        <Img src={`https://testreel-1.ams3.cdn.digitaloceanspaces.com/viltz.ee/${thumbnail}`} alt={title} className="grid-item-thumbnail" loading="lazy" />
         <LinkOverlay href={href} target="_blank">
           <Text mt={2}>{title}</Text>
         </LinkOverlay>
@@ -21,7 +22,7 @@ export const WorkGridItem = ({ children, id, title, thumbnail }) => {
       <NextLink href={`/work/${id}`}>
         <LinkBox cursor="pointer">
           <Image
-            src={`${process.env.OCULAR_URL}/resize?url=https://viltz.ee${thumbnail}`}
+            src={`https://testreel-1.ams3.cdn.digitaloceanspaces.com/viltz.ee/${thumbnail}`}
             alt={title}
             className="grid-item-thumbnail"
             mt={5}
