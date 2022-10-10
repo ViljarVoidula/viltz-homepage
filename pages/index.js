@@ -22,7 +22,7 @@ const Page = () => {
             <Heading as="h2" variant="page-title">
               Viljar Võidula
             </Heading>
-            <p>Digital artisan ( Architect/Developer/QA )</p>{' '}
+            <p>Digital artisan - Architect/Developer/QA </p>{' '}
           </Box>
 
           <Box flexShrink={0} mt={{ base: 4, md: 0 }} ml={{ md: 6 }} align="center">
@@ -70,14 +70,14 @@ const Page = () => {
             <BioYear>2010</BioYear>Graduated Kehtna School of Technology and Economics
           </BioSection>
           <BioSection>
-            <BioYear>2011</BioYear>Started working as Network monitoring Administrator in Elion Ettevõtted AS
+            <BioYear>2011</BioYear>Started telecom industry career as Network monitoring Administrator in Elion Ettevõtted AS
           </BioSection>
           <BioSection>
-            <BioYear>2012</BioYear>Started working as a Software testing expert in the TV department of Telia Estonia
+            <BioYear>2012</BioYear>Changed positions and moved to TV department of Telia Estonia as a Software testing expert
           </BioSection>
           <BioSection>
             <BioYear>2012</BioYear>
-            {`QA of world first IPTV application on Samsung smartTV's`}{' '}
+            QA of world first IPTV <b>award winning</b> application on Samsung smartTV platform &nbsp;
             <Link href="https://www.strategyanalytics.com/zh/strategy-analytics/blogs/networks/residential-broadband/tv-broadband/2012/09/13/samsung-s-elion-tv-app-may-spell-doom-for-set-top-box-vendors-and-offer-hope-to-service-providers">
               Samsung’s Elion TV App May Spell Doom For Set-top Box Vendors, And Offer Hope to Service Providers
             </Link>
@@ -86,16 +86,17 @@ const Page = () => {
             <BioYear>2014</BioYear>Founded <b>Testreel</b> - a software testing and development service company
           </BioSection>
           <BioSection>
-            <BioYear>2014</BioYear>Started coding using Javascript and NPM
+            <BioYear>2014</BioYear>Initial steps developing e2e test automation platform coding using <Link href="https://nodejs.org/en/">NodeJS</Link> &#38;{' '}
+            <Link href="https://reactjs.org/"> React</Link>
           </BioSection>
           <BioSection>
             <BioYear>2017</BioYear>Published Gamestreams application on LG WebOS
           </BioSection>
           <BioSection>
-            <BioYear>2019</BioYear>Worked as Solution Architect in Telia Estonia
+            <BioYear>2019</BioYear>Worked as Solution Architect in Telia Estonia developing network configuration orchestration platform
           </BioSection>
           <BioSection>
-            <BioYear>2021 to present</BioYear>Working as freelancer and consultant
+            <BioYear>2022 to present</BioYear>Software development team lead in <Link href="https://www.veriff.com/">Veriff</Link>
           </BioSection>
         </Section>
         <Section delay={0.36}>
