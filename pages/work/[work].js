@@ -7,12 +7,31 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { Title, WorkImage, Meta } from '../../components/work';
 import Paragraph from '../../components/paragraph';
 import { projects } from '../../lib/work-details';
+import { NextSeo } from 'next-seo';
 export default function Project() {
   const { query, isReady } = useRouter();
   if (!isReady || !query.work) return null;
 
   return (
-    <Layout title="Inkdrop">
+    <Layout title={projects[query.work].title}>
+      <NextSeo
+        title={projects[query.work].title}
+        description={projects[query.work].description}
+        images={projects[query.work].sampleImages.map(image => ({
+          url: `https://testreel-1.ams3.digitaloceanspaces.com/viltz.ee${image}`,
+          alt: `${projects[query.work].technologies.join(' ')}`
+        }))}
+        robotsProps={{
+          nosnippet: true,
+          notranslate: true,
+          noimageindex: true,
+          noarchive: true,
+          maxSnippet: -1,
+          maxImagePreview: 'none',
+          maxVideoPreview: -1
+        }}
+        canonical={`www.viltz.ee/work/${projects[query.work].title.trim().toLowerCase()}`}
+      />
       <Container>
         <Title>
           {projects[query.work].title} <Badge align="center" mt={2}>{`${projects[query.work].startYear} - ${projects[query?.work]?.endYear ?? 'present'}`}</Badge>

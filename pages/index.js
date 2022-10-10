@@ -6,11 +6,20 @@ import Paragraph from '../components/paragraph';
 import NextLink from 'next/link';
 import { BioYear, BioSection } from '../components/bio';
 import Layout from '../components/layouts/article';
+import { DefaultSeo } from 'next-seo';
 
 const Page = () => {
   return (
     <Layout>
       <Container>
+        <DefaultSeo
+          openGraph={{
+            type: 'website',
+            locale: 'en_US',
+            url: 'https://www.viltz.ee/',
+            site_name: 'Viljar Võidula public CV'
+          }}
+        />
         <Box>
           <Image src={`/images/logo_1200${useColorModeValue('', '_inverted')}.png`} loading="lazy" alt="logo" mt={6} fallbackSrc={'/images/tail-spin.svg'} />
         </Box>
