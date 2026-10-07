@@ -5,10 +5,11 @@ import Experience from '../components/experience';
 import ImpactList from '../components/impact-list';
 import Projects from '../components/projects';
 import Section from '../components/section';
-import { books, education, metrics, otherImpact, photos, principles, profile, skills } from '../lib/cv';
+import WorkWithMe from '../components/work-with-me';
+import { books, contract, education, metrics, otherImpact, photos, principles, profile, skills } from '../lib/cv';
 import styles from '../styles/cv.module.css';
 
-const description = `${profile.name} — ${profile.title}. ${profile.summary}`;
+const description = `${profile.name} — ${profile.title}. Available for contract and fractional work. ${profile.summary}`;
 
 const personSchema = {
   '@context': 'https://schema.org',
@@ -41,10 +42,22 @@ const Home = () => (
 
     <section className={styles.hero}>
       <div className={styles.heroText}>
+        <a href="#work" className={`${styles.badge} ${styles.load}`}>
+          <span className={styles.badgeDot} aria-hidden="true" />
+          Available for contract work
+        </a>
         <p className={`${styles.greeting} ${styles.load}`}>{profile.greeting}</p>
         <h1 className={`${styles.name} ${styles.load} ${styles.d1}`}>{profile.name}</h1>
         <p className={`${styles.role} ${styles.load} ${styles.d2}`}>{profile.title}</p>
         <p className={`${styles.summary} ${styles.load} ${styles.d3}`}>{profile.summary}</p>
+        <div className={`${styles.actions} ${styles.heroActions} ${styles.load} ${styles.d4}`}>
+          <a className={styles.button} href={contract.enquiryUrl}>
+            Enquire about a contract
+          </a>
+          <a className={`${styles.button} ${styles.buttonGhost}`} href="#work">
+            What I take on
+          </a>
+        </div>
         <p className={`${styles.contacts} ${styles.load} ${styles.d4}`}>
           <a href={`mailto:${profile.email}`}>{profile.email}</a>
           <a href={profile.linkedin}>LinkedIn</a>
@@ -63,7 +76,7 @@ const Home = () => (
       <Image src="/images/viljar.jpg" alt={`Portrait of ${profile.name}`} width={64} height={64} className={styles.portrait} />
       <div className={styles.prose}>
         <p>
-          <strong>Now:</strong> founder &amp; product owner of <a href="https://5xer.com">Fivexer</a>.
+          <strong>Now:</strong> founder &amp; product owner of <a href="https://5xer.com">Fivexer</a> — and open to contract work alongside it.
         </p>
         <p>
           <strong>Next:</strong> a product company with an interesting problem to solve.
@@ -81,6 +94,8 @@ const Home = () => (
         ))}
       </ul>
     </Section>
+
+    <WorkWithMe />
 
     <Section id="experience" title="Experience">
       <Experience />

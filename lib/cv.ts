@@ -11,6 +11,31 @@ export const profile = {
   url: 'https://www.viltz.ee/'
 };
 
+export const contract = {
+  bookingUrl: 'https://calendar.app.google/STKRNYDh7Mz8YtNWA',
+  enquiryUrl: `mailto:${profile.email}?subject=${encodeURIComponent('Contract enquiry')}&body=${encodeURIComponent(
+    'Hi Viljar,\n\nProject:\nTimeline:\nBudget range:\nHow you found me:\n'
+  )}`,
+  pitch:
+    'I take on contract and fractional work where product and engineering meet — usually when a team needs someone who can write the spec, design the system and stay through delivery.',
+  offers: [
+    { title: 'Product discovery & specs', body: 'Turn a fuzzy problem into a written spec: schema, rules, failure cases and what “done” means.' },
+    { title: 'Decisioning & matching systems', body: 'Routing, assignment and matching engines — measured with precision, recall and false-positive cost.' },
+    { title: 'API & integration design', body: 'REST/GraphQL contracts, webhooks and versioning that partner teams can build against without you.' },
+    {
+      title: 'AI transformation & adoption',
+      body: 'Find where LLM workflows actually pay off, build them with human review where mistakes are costly, and get the team using them.'
+    },
+    { title: 'Interim CTO & due diligence', body: 'Technical leadership through a growth phase, or the technical side of a funding round.' }
+  ],
+  terms: [
+    { label: 'Engagement', value: 'Fractional or fixed project' },
+    { label: 'Where', value: 'Remote from Estonia · on-site by arrangement' },
+    { label: 'Availability', value: 'Open to new projects' },
+    { label: 'Rates', value: '€1,000/day · €125/hour', note: 'Half-day minimum · excl. VAT' }
+  ]
+};
+
 export type Metric = {
   metric: string;
   count: { to: number; decimals?: number; prefix?: string; suffix?: string };

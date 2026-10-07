@@ -6,6 +6,7 @@ import Deer from './deer';
 import ThemeToggle from './theme-toggle';
 
 const nav = [
+  { id: 'work', label: 'Work with me' },
   { id: 'impact', label: 'Impact' },
   { id: 'experience', label: 'Experience' },
   { id: 'skills', label: 'Skills' },

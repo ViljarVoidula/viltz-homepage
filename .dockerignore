@@ -2,3 +2,12 @@ node_modules
 .next
 .kilo
 .git
+.env*
+*.tsbuildinfo
+*.log
+Dockerfile
+.dockerignore
+README.md
+public/sw.js
+public/sw.js.map
+public/swe-worker-*.js
