@@ -63,11 +63,10 @@ const Home = () => (
       <Image src="/images/viljar.jpg" alt={`Portrait of ${profile.name}`} width={64} height={64} className={styles.portrait} />
       <div className={styles.prose}>
         <p>
-          <strong>Now:</strong> founder &amp; product owner of <a href="https://5xer.com">Fivexer</a>, and product &amp; platform contractor at{' '}
-          <a href="https://www.veriff.com/">Veriff</a>.
+          <strong>Now:</strong> founder &amp; product owner of <a href="https://5xer.com">Fivexer</a>.
         </p>
         <p>
-          <strong>Next:</strong> anti-financial-crime product — AML screening, sanctions and PEP matching, transaction monitoring and risk scoring.
+          <strong>Next:</strong> a product company with an interesting problem to solve.
         </p>
       </div>
     </div>

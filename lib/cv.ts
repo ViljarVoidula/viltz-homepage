@@ -68,19 +68,6 @@ export type Role = {
 
 export const roles: Role[] = [
   {
-    title: 'Technical Contractor — Product & Platform',
-    company: 'Veriff',
-    where: 'Tallinn',
-    dates: 'Oct 2025 – present',
-    logo: '/images/logos/veriff.png',
-    bullets: [
-      'Own modernisation of the reviewer task-distribution system, from discovery to rollout.',
-      'Specify and review REST/GraphQL contracts and event flows around the decisioning engine.',
-      'Improve operational data so throughput, queues and edge cases are measured.',
-      'Turn recurring compliance-operations pain into scoped, prioritised increments.'
-    ]
-  },
-  {
     title: 'Founder & Product Owner',
     company: 'Fivexer',
     where: 'formerly Forgemaster AI · Remote',
@@ -91,6 +78,19 @@ export const roles: Role[] = [
       'Own an engine that plans rotas and routes tasks to people or AI agents, with an auditable reason per decision.',
       'Define REST APIs, JSON schemas and webhook contracts, and review the code.',
       'Run demos and pricing talks with prospects, feeding findings into the roadmap.'
+    ]
+  },
+  {
+    title: 'Technical Contractor — Product & Platform',
+    company: 'Veriff',
+    where: 'Tallinn',
+    dates: 'Oct 2025 – Sep 2026',
+    logo: '/images/logos/veriff.png',
+    bullets: [
+      'Owned modernisation of the reviewer task-distribution system, from discovery to rollout.',
+      'Specified and reviewed REST/GraphQL contracts and event flows around the decisioning engine.',
+      'Improved operational data so throughput, queues and edge cases are measured.',
+      'Turned recurring compliance-operations pain into scoped, prioritised increments.'
     ]
   },
   {
