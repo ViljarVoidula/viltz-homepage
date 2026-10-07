@@ -1,9 +1,11 @@
 import { contract } from '../lib/cv';
 import styles from '../styles/cv.module.css';
 
+// The page's one inverse band: the strongest pause lands on the offer.
+
 const WorkWithMe = () => (
-  <section id="work" className={`reveal ${styles.section}`}>
-    <div className={styles.workCard}>
+  <section id="work" data-band="inverse" className={`inverse ${styles.section} ${styles.band}`}>
+    <div className={`reveal ${styles.workCard}`}>
       <div className={styles.prose}>
         <h2 className={styles.heading}>Work with me</h2>
         <p className={styles.workPitch}>{contract.pitch}</p>

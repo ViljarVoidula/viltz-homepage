@@ -72,15 +72,17 @@ const Layout = ({ children }: { children: ReactNode }) => {
       <main id="top" className={styles.wrap}>
         {children}
       </main>
-      <footer className={styles.wrap}>
-        <div className={styles.footer}>
-          <span className={styles.footerBrand} data-trail-end>
-            <Deer width={26} className={styles.mark} />
-            <span>
-              {profile.name} · <a href={`mailto:${profile.email}`}>{profile.email}</a>
+      <footer data-band="inverse" className={`inverse ${styles.footerBand}`}>
+        <div className={styles.wrap}>
+          <div className={styles.footer}>
+            <span className={styles.footerBrand} data-trail-end>
+              <Deer width={26} className={styles.mark} />
+              <span>
+                {profile.name} · <a href={`mailto:${profile.email}`}>{profile.email}</a>
+              </span>
             </span>
-          </span>
-          <a href="#top">Back to top</a>
+            <a href="#top">Back to top</a>
+          </div>
         </div>
       </footer>
     </>

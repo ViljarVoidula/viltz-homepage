@@ -11,6 +11,16 @@
   --bar: rgb(240 231 219 / 0.92);
   --toggle-bg: #805ad5;
   --toggle-fg: #ffffff;
+  /* Background beats: lighter and deeper bands, and the inverse band (see .inverse). */
+  --band-paper: #faf6f0;
+  --band-clay: #e6dccd;
+  --inv-bg: #22201c;
+  --inv-ink: #f0e7db;
+  --inv-ink2: #d9d2c6;
+  --inv-muted: #b5ada0;
+  --inv-rule: #4a453e;
+  --inv-accent: #9db8ff;
+  --inv-accent-hover: #c3d3ff;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   color-scheme: light;
 }
@@ -28,7 +38,30 @@
   --bar: rgb(32 32 35 / 0.92);
   --toggle-bg: #ed8936;
   --toggle-fg: #202023;
+  --band-paper: #28282c;
+  --band-clay: #303035;
+  --inv-bg: #edeae4;
+  --inv-ink: #202023;
+  --inv-ink2: #3b3731;
+  --inv-muted: #5f584d;
+  --inv-rule: #cfcbc3;
+  --inv-accent: #b0157a;
+  --inv-accent-hover: #8a0f5f;
   color-scheme: dark;
+}
+
+/* A negative of the current theme: everything inside reads its colours from the swapped tokens.
+   Used by the inverse bands and by trail deer standing on one (components/deer-trail.tsx). */
+.inverse {
+  --bg: var(--inv-bg);
+  --ink: var(--inv-ink);
+  --ink2: var(--inv-ink2);
+  --muted: var(--inv-muted);
+  --rule: var(--inv-rule);
+  --rule2: var(--inv-rule);
+  --accent: var(--inv-accent);
+  --accent-hover: var(--inv-accent-hover);
+  color: var(--ink);
 }
 
 *,

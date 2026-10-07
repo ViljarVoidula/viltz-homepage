@@ -18,10 +18,16 @@ const GROUND = (220 / 230) * FIG_H;
 const RADIUS = 28;
 // Where the line's tip sits in the viewport while scrolling.
 const TIP = 0.72;
+// How quickly the line catches up with the scroll (time constant of its easing).
+const EASE_MS = 240;
+// The hero deer's entrance runs about this long; the line grows out of its chin once it has landed.
+const HERO_SETTLE = 1100;
 
 type Point = { x: number; y: number };
-type Station = Point & { side: 'left' | 'right'; pose: DeerPose };
-type Layout = { width: number; height: number; d: string; stations: Station[] };
+type Station = Point & { side: 'left' | 'right'; pose: DeerPose; inverse: boolean };
+// Vertical extent of an inverse band; bands run the full width of the page.
+type Band = { top: number; bottom: number };
+type Layout = { width: number; height: number; d: string; stations: Station[]; bands: Band[] };
 
 // An orthogonal polyline with rounded corners.
 const roundedPath = (points: Point[]) => {
@@ -40,9 +46,16 @@ const roundedPath = (points: Point[]) => {
   return `${d}L${last.x} ${last.y}`;
 };
 
-const docRect = (el: Element) => {
-  const r = el.getBoundingClientRect();
-  return { left: r.left + scrollX, right: r.right + scrollX, top: r.top + scrollY, bottom: r.bottom + scrollY, height: r.height };
+// Page position from layout alone. Unlike getBoundingClientRect this ignores transforms, so the hero's
+// slide-in and the sections' scroll reveals can't shift the route while they play.
+const docRect = (el: HTMLElement) => {
+  let left = 0;
+  let top = 0;
+  for (let node: HTMLElement | null = el; node; node = node.offsetParent as HTMLElement | null) {
+    left += node.offsetLeft;
+    top += node.offsetTop;
+  }
+  return { left, right: left + el.offsetWidth, top, bottom: top + el.offsetHeight, height: el.offsetHeight };
 };
 
 // Measures the page and plans the route: down from the hero deer's chin, across each section's top
@@ -50,9 +63,8 @@ const docRect = (el: Element) => {
 // Both gutters must fit a deer plus the line on either side of it.
 const measure = (): Layout | null => {
   const main = document.querySelector('main');
-  // The wrapper, not the svg: the svg tilts towards the pointer, the wrapper stays put.
-  const start = document.querySelector('[data-trail-start]');
-  const end = document.querySelector('[data-trail-end]');
+  const start = document.querySelector<HTMLElement>('[data-trail-start]');
+  const end = document.querySelector<HTMLElement>('[data-trail-end]');
   if (!main || !start || !end) return null;
 
   const width = document.documentElement.clientWidth;
@@ -61,8 +73,20 @@ const measure = (): Layout | null => {
   // Only draw when both gutters can hold a deer.
   if (content.left < FIG_W + 30) return null;
 
+  // Banded sections never transform themselves (components/section.tsx), so these edges are final.
+  const bands = Array.from(document.querySelectorAll<HTMLElement>('[data-band="inverse"]'), el => {
+    const r = docRect(el);
+    return { top: r.top, bottom: r.bottom };
+  });
+  const onBand = (y: number) => bands.some(band => y >= band.top && y <= band.bottom);
+
   const chin = docRect(start);
-  const foot = docRect(end);
+  // The footer deer's own box, found from its brand row (layout only, then the svg's offset in it).
+  const brand = docRect(end);
+  const svg = end.querySelector('svg');
+  if (!svg) return null;
+  const offset = { x: svg.getBoundingClientRect().left - end.getBoundingClientRect().left, y: svg.getBoundingClientRect().top - end.getBoundingClientRect().top };
+  const foot = { left: brand.left + offset.x, top: brand.top + offset.y, width: svg.getBoundingClientRect().width, height: svg.getBoundingClientRect().height };
   // Start inside the chin's bottom edge on the emblem's centre line (x 287.5, y 770 of its 640×778
   // viewBox), so the trail reads as the drawing's own line running on.
   const points: Point[] = [{ x: chin.left + ((chin.right - chin.left) * 287.5) / 640, y: chin.top + (chin.height * 769) / 778 }];
@@ -83,47 +107,55 @@ const measure = (): Layout | null => {
     const ground = cross + 40 + GROUND;
 
     points.push({ x: points[points.length - 1].x, y: cross }, { x: outer, y: cross }, { x: outer, y: ground }, { x: inner, y: ground });
-    placed.push({ x: centre, y: ground, side, pose });
+    placed.push({ x: centre, y: ground, side, pose, inverse: onBand(ground - GROUND) || onBand(ground) });
     floor = ground + 60;
   });
 
-  const endY = Math.max(foot.top + foot.height / 2, floor);
-  points.push({ x: points[points.length - 1].x, y: endY }, { x: foot.left - 12, y: endY });
+  // Mirror the start: curve in under the footer deer and run up into its chin, so the trail reads as
+  // one line from deer to deer.
+  const footChin = { x: foot.left + (foot.width * 287.5) / 640, y: foot.top + (foot.height * 769) / 778 };
+  const endY = Math.max(footChin.y + 18, floor);
+  points.push({ x: points[points.length - 1].x, y: endY }, { x: footChin.x, y: endY }, footChin);
 
-  return { width, height: endY + 40, d: roundedPath(points), stations: placed };
+  return { width, height: endY + 40, d: roundedPath(points), stations: placed, bands };
 };
+
+const sameBands = (a: Band[], b: Band[]) => a.length === b.length && a.every((band, i) => band.top === b[i].top && band.bottom === b[i].bottom);
 
 const DeerTrail = () => {
   const [layout, setLayout] = useState<Layout | null>(null);
   const pathRef = useRef<SVGPathElement>(null);
+  // The same line in the inverse ink, clipped to the inverse bands so it stays visible on them.
+  const inversePathRef = useRef<SVGPathElement>(null);
   const stationRefs = useRef<(HTMLDivElement | null)[]>([]);
   // How far the line is drawn, kept across re-plans so a reflow doesn't restart it.
   const drawnRef = useRef(0);
 
-  // Re-plan whenever the page reflows (fonts, images, viewport changes).
+  // Plan once the page has settled (web fonts in, hero landed), then re-plan only on real reflows
+  // such as a viewport resize. Planning earlier would move the route under the reader.
   useEffect(() => {
     let frame = 0;
+    let ready = false;
+    let timer = 0;
     const update = () => {
       frame = 0;
       const next = measure();
-      setLayout(prev => (prev && next && prev.d === next.d && prev.width === next.width ? prev : next));
+      setLayout(prev => (prev && next && prev.d === next.d && prev.width === next.width && sameBands(prev.bands, next.bands) ? prev : next));
     };
     const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(update);
+      if (ready && !frame) frame = requestAnimationFrame(update);
     };
     const observer = new ResizeObserver(schedule);
     observer.observe(document.body);
-    document.fonts?.ready.then(schedule);
-    // The hero slides into place on load; measure again once it has landed. Other animations
-    // (the scroll reveals) end too, but don't move anything the route depends on.
-    const onAnimationEnd = (event: AnimationEvent) => {
-      const start = document.querySelector('[data-trail-start]');
-      if (start && event.target instanceof Element && event.target.contains(start)) schedule();
-    };
-    document.addEventListener('animationend', onAnimationEnd);
+    (document.fonts?.ready ?? Promise.resolve()).then(() => {
+      timer = window.setTimeout(() => {
+        ready = true;
+        schedule();
+      }, HERO_SETTLE);
+    });
     return () => {
       observer.disconnect();
-      document.removeEventListener('animationend', onAnimationEnd);
+      clearTimeout(timer);
       cancelAnimationFrame(frame);
     };
   }, []);
@@ -142,37 +174,47 @@ const DeerTrail = () => {
     const end = document.querySelector('[data-trail-end]');
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    path.style.strokeDasharray = `${length}`;
+    const paths = [path, inversePathRef.current].filter(p => p !== null);
+    paths.forEach(p => (p.style.strokeDasharray = `${length}`));
     let drawn = reduced ? length : Math.min(drawnRef.current, length);
     let frame = 0;
 
-    const targetFor = () => {
-      const max = document.documentElement.scrollHeight - innerHeight;
-      if (scrollY >= max - 2) return length;
-      const tip = scrollY + innerHeight * TIP;
+    // Length of line drawn down to page height y.
+    const lengthAt = (y: number) => {
       let lo = 0;
       let hi = ys.length - 1;
       while (lo < hi) {
         const mid = (lo + hi + 1) >> 1;
-        if (ys[mid] <= tip) lo = mid;
+        if (ys[mid] <= y) lo = mid;
         else hi = mid - 1;
       }
-      return ys[lo] <= tip ? lo * step : 0;
+      return ys[lo] <= y ? lo * step : 0;
+    };
+    const targetFor = () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      return scrollY >= max - 2 ? length : lengthAt(scrollY + innerHeight * TIP);
     };
 
     const paint = () => {
       drawnRef.current = drawn;
-      path.style.strokeDashoffset = `${length - drawn}`;
+      paths.forEach(p => (p.style.strokeDashoffset = `${length - drawn}`));
       arrivals.forEach((at, i) => stationRefs.current[i]?.classList.toggle('is-here', drawn >= at));
       end?.classList.toggle('is-here', drawn >= length - 1);
     };
 
-    const tick = () => {
+    // Exponential ease by elapsed time, so it glides the same at any frame rate.
+    let last = 0;
+    const tick = (now: number) => {
+      const dt = last ? Math.min(now - last, 64) : 16;
+      last = now;
       const target = targetFor();
-      drawn += (target - drawn) * 0.12;
+      drawn += (target - drawn) * (1 - Math.exp(-dt / EASE_MS));
       if (Math.abs(target - drawn) < 0.5) drawn = target;
       paint();
-      frame = drawn === target ? 0 : requestAnimationFrame(tick);
+      if (drawn === target) {
+        frame = 0;
+        last = 0;
+      } else frame = requestAnimationFrame(tick);
     };
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(tick);
@@ -180,7 +222,9 @@ const DeerTrail = () => {
 
     if (reduced) paint();
     else {
-      drawn = Math.min(targetFor(), drawn);
+      // Opened partway down the page: start from the top of the screen, so only what's visible draws in.
+      if (drawnRef.current === 0) drawn = lengthAt(scrollY);
+      paint();
       onScroll();
       addEventListener('scroll', onScroll, { passive: true });
     }
@@ -195,7 +239,15 @@ const DeerTrail = () => {
   return (
     <div className="deer-trail" style={{ width: layout.width, height: layout.height }} aria-hidden="true">
       <svg width={layout.width} height={layout.height}>
+        <defs>
+          <clipPath id="deer-trail-inverse">
+            {layout.bands.map(band => (
+              <rect key={band.top} x={0} y={band.top} width={layout.width} height={band.bottom - band.top} />
+            ))}
+          </clipPath>
+        </defs>
         <path ref={pathRef} className="deer-trail__line" d={layout.d} />
+        <path ref={inversePathRef} className="deer-trail__line deer-trail__line--inverse" d={layout.d} clipPath="url(#deer-trail-inverse)" />
       </svg>
       {layout.stations.map((st, i) => (
         <div
@@ -203,7 +255,7 @@ const DeerTrail = () => {
           ref={el => {
             stationRefs.current[i] = el;
           }}
-          className="deer-trail__station"
+          className={st.inverse ? 'deer-trail__station inverse' : 'deer-trail__station'}
           style={{ left: st.x - FIG_W / 2, top: st.y - GROUND, width: FIG_W }}
         >
           <DeerFigure pose={st.pose} flip={st.side === 'right'} />

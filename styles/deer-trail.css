@@ -9,6 +9,18 @@
   pointer-events: none;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .deer-trail {
+    animation: trail-in 0.8s ease both;
+  }
+}
+
+@keyframes trail-in {
+  from {
+    opacity: 0;
+  }
+}
+
 .deer-trail > svg {
   display: block;
   overflow: visible;
@@ -22,6 +34,11 @@
   stroke-linecap: round;
   stroke-linejoin: round;
   transition: stroke 0.3s;
+}
+
+/* Drawn over the plain line, clipped to the inverse bands: the line flips at each band edge. */
+.deer-trail__line--inverse {
+  stroke: var(--inv-ink);
 }
 
 .deer-trail__station {

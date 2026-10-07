@@ -87,7 +87,7 @@ const Home = () => (
       </div>
     </div>
 
-    <Section id="impact" title="Selected impact">
+    <Section id="impact" title="Selected impact" band="paper">
       <ImpactList items={metrics} />
       <ul className={`${styles.bullets} ${styles.prose} ${styles.otherImpact}`}>
         {otherImpact.map(item => (
@@ -115,7 +115,7 @@ const Home = () => (
       </dl>
     </Section>
 
-    <Section id="how" title="How I work">
+    <Section id="how" title="How I work" band="clay">
       <div className={styles.principles}>
         {principles.map(item => (
           <div key={item.title} className={styles.principle}>
@@ -149,7 +149,7 @@ const Home = () => (
       ))}
     </Section>
 
-    <Section id="personal" title="Personal">
+    <Section id="personal" title="Personal" band="paper">
       <dl className={styles.rows}>
         <div className={styles.row}>
           <dt>Education</dt>
@@ -189,7 +189,7 @@ const Home = () => (
       </div>
     </Section>
 
-    <Section id="books" title="Books I love" last>
+    <Section id="books" title="Books I love" band="paper" last>
       <div className={styles.shelf}>
         {books.map(book => (
           <a key={book.title} href={book.url} className={styles.book} target="_blank" rel="noopener noreferrer">

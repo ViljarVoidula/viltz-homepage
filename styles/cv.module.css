@@ -505,6 +505,13 @@
   border-radius: 14px;
 }
 
+/* On its band the card needs no outline: the band is the container. */
+.band .workCard {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+}
+
 .workCard .heading {
   margin-bottom: 10px;
 }
@@ -566,6 +573,10 @@
   .workCard {
     padding: 24px 20px;
   }
+
+  .band .workCard {
+    padding: 0;
+  }
 }
 
 /* Now / next */
@@ -608,6 +619,34 @@
 
 .sectionLast {
   padding-bottom: 72px;
+}
+
+/* Background beats: a band runs edge to edge (the border-image paints past the content column
+   without adding scroll overflow) and gets more room than a plain section, so it reads as a pause. */
+.band {
+  --band: var(--bg);
+  margin-top: 40px;
+  padding: clamp(72px, 9vw, 120px) 0;
+  border-image-source: linear-gradient(var(--band), var(--band));
+  border-image-slice: 0 fill;
+  border-image-outset: 0 100vw;
+}
+
+.band + .band {
+  margin-top: 0;
+}
+
+.bandPaper {
+  --band: var(--band-paper);
+}
+
+.bandClay {
+  --band: var(--band-clay);
+}
+
+/* Neighbouring paper bands read as one. */
+.bandPaper + .bandPaper {
+  padding-top: 0;
 }
 
 .heading {
@@ -1076,6 +1115,17 @@
   border-top: 2px solid var(--ink);
   font-size: 16px;
   color: var(--muted);
+}
+
+/* The page closes on an inverse band, so the footer needs no rule. */
+.footerBand {
+  background: var(--bg);
+  transition: background-color 0.5s;
+}
+
+.footerBand .footer {
+  padding-block: 48px 64px;
+  border-top: none;
 }
 
 .footerBrand {
