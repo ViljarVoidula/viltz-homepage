@@ -1,12 +1,9 @@
-import { useEffect, useRef } from 'react';
 import { deerPath } from './deer-path';
 
 type DeerProps = {
   className?: string;
   width: number;
   alt?: string;
-  // Turn the head slightly towards the pointer.
-  gaze?: boolean;
 };
 
 // The traced outline is one path; these clips cut it into parts that can move on their own.
@@ -34,51 +31,10 @@ export const DeerSymbol = () => (
   </svg>
 );
 
-const useGaze = (ref: React.RefObject<SVGSVGElement | null>, enabled: boolean) => {
-  useEffect(() => {
-    const svg = ref.current;
-    if (!enabled || !svg) return;
-    if (!matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)').matches) return;
-
-    let frame = 0;
-    let x = 0;
-    let y = 0;
-    const update = () => {
-      frame = 0;
-      const box = svg.getBoundingClientRect();
-      const clamp = (v: number) => Math.max(-1, Math.min(1, v));
-      const dx = clamp((x - (box.left + box.width / 2)) / (innerWidth / 2));
-      const dy = clamp((y - (box.top + box.height / 2)) / (innerHeight / 2));
-      svg.style.setProperty('--gaze-y', `${(dx * 14).toFixed(2)}deg`);
-      svg.style.setProperty('--gaze-x', `${(-dy * 8).toFixed(2)}deg`);
-    };
-    const onMove = (event: PointerEvent) => {
-      x = event.clientX;
-      y = event.clientY;
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-    const onLeave = () => {
-      svg.style.removeProperty('--gaze-x');
-      svg.style.removeProperty('--gaze-y');
-    };
-    window.addEventListener('pointermove', onMove, { passive: true });
-    document.documentElement.addEventListener('pointerleave', onLeave);
-    return () => {
-      window.removeEventListener('pointermove', onMove);
-      document.documentElement.removeEventListener('pointerleave', onLeave);
-      cancelAnimationFrame(frame);
-    };
-  }, [ref, enabled]);
-};
-
 // Filled with the theme's ink colour (see .deer-mark in globals.css), so one shape serves both themes.
-const Deer = ({ className, width, alt = '', gaze = false }: DeerProps) => {
-  const ref = useRef<SVGSVGElement>(null);
-  useGaze(ref, gaze);
-
+const Deer = ({ className, width, alt = '' }: DeerProps) => {
   return (
     <svg
-      ref={ref}
       width={width}
       height={Math.round((width * 778) / 640)}
       viewBox="0 0 640 778"

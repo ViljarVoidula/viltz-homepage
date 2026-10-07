@@ -1,0 +1,710 @@
+/* Scroll trail on the homepage: a line drawn from the hero deer past a deer at each section
+   (components/deer-trail.tsx), and the rigged side-view deer it visits (components/deer-figure.tsx). */
+
+.deer-trail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.deer-trail > svg {
+  display: block;
+  overflow: visible;
+}
+
+.deer-trail__line {
+  fill: none;
+  stroke: var(--ink);
+  /* Matches the emblem's line weight so the trail continues it. */
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.3s;
+}
+
+.deer-trail__station {
+  position: absolute;
+  opacity: 0;
+  transform: translateY(14px) scale(0.9);
+  transform-origin: 50% 100%;
+  transition:
+    opacity 0.5s,
+    transform 0.8s var(--ease);
+}
+
+.deer-trail__station.is-here {
+  opacity: 1;
+  transform: none;
+}
+
+/* Figure */
+.deer-fig {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  fill: var(--bg);
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition:
+    fill 0.3s,
+    stroke 0.3s;
+}
+
+.deer-fig .ink {
+  fill: var(--ink);
+}
+
+.deer-fig .facet {
+  stroke: var(--bg);
+  stroke-width: 0.6;
+}
+
+.deer-fig--flip {
+  transform: scaleX(-1);
+}
+
+/* Rig pivots, in the figure's viewBox units. */
+.deer-fig g {
+  transform-box: view-box;
+}
+
+.deer-fig__body {
+  transform-origin: 90px 100px;
+}
+
+.deer-fig__torso {
+  transform-origin: 88px 100px;
+}
+
+.deer-fig__neck {
+  transform-origin: 118px 68px;
+}
+
+.deer-fig__head {
+  transform-origin: 148px 27px;
+}
+
+.deer-fig__ear {
+  transform-origin: 144px 19px;
+}
+
+.deer-fig__tail {
+  transform-origin: 42px 64px;
+}
+
+.deer-fig__leg--fn {
+  transform-origin: 122px 88px;
+}
+
+.deer-fig__leg--ff {
+  transform-origin: 112px 88px;
+}
+
+.deer-fig__leg--hn {
+  transform-origin: 56px 84px;
+}
+
+.deer-fig__leg--hf {
+  transform-origin: 66px 84px;
+}
+
+/* Knees and hocks, in each leg's own (unshifted) coordinates. */
+.deer-fig__leg--fn .deer-fig__shin,
+.deer-fig__leg--ff .deer-fig__shin {
+  transform-origin: 122px 114px;
+}
+
+.deer-fig__leg--hn .deer-fig__shin,
+.deer-fig__leg--hf .deer-fig__shin {
+  transform-origin: 60px 110px;
+}
+
+/* Poses: the still frame each deer holds (and all it shows with reduced motion). */
+.deer-fig--walk .deer-fig__leg--fn,
+.deer-fig--walk .deer-fig__leg--hf {
+  transform: rotate(-16deg);
+}
+
+.deer-fig--walk .deer-fig__leg--ff,
+.deer-fig--walk .deer-fig__leg--hn {
+  transform: rotate(14deg);
+}
+
+.deer-fig--walk .deer-fig__leg--ff .deer-fig__shin {
+  transform: rotate(30deg);
+}
+
+.deer-fig--leap .deer-fig__body {
+  transform: translateY(-40px) rotate(-2deg);
+}
+
+.deer-fig--leap .deer-fig__leg--fn,
+.deer-fig--leap .deer-fig__leg--ff {
+  transform: rotate(-80deg);
+}
+
+.deer-fig--leap .deer-fig__leg--fn .deer-fig__shin,
+.deer-fig--leap .deer-fig__leg--ff .deer-fig__shin {
+  transform: rotate(10deg);
+}
+
+.deer-fig--leap .deer-fig__leg--hn,
+.deer-fig--leap .deer-fig__leg--hf {
+  transform: rotate(70deg);
+}
+
+/* Neck angled steeply down from the shoulder, nose to the ground just ahead of the forelegs. */
+.deer-fig--graze .deer-fig__neck {
+  transform: rotate(110deg);
+}
+
+.deer-fig--graze .deer-fig__head {
+  transform: rotate(-12deg);
+}
+
+.deer-fig--graze .deer-fig__leg--fn {
+  transform: rotate(6deg);
+}
+
+.deer-fig--graze .deer-fig__leg--ff {
+  transform: rotate(10deg);
+}
+
+.deer-fig--look .deer-fig__neck {
+  transform: rotate(-12deg);
+}
+
+.deer-fig--look .deer-fig__head {
+  transform: scaleX(-1) rotate(-8deg);
+}
+
+/* Lying down: forelegs folded under the chest, hind legs tucked under the belly. */
+.deer-fig--rest .deer-fig__body {
+  transform: translateY(44px);
+}
+
+.deer-fig--rest .deer-fig__leg--fn,
+.deer-fig--rest .deer-fig__leg--ff {
+  transform: rotate(70deg);
+}
+
+.deer-fig--rest .deer-fig__leg--fn .deer-fig__shin,
+.deer-fig--rest .deer-fig__leg--ff .deer-fig__shin {
+  transform: rotate(-160deg);
+}
+
+.deer-fig--rest .deer-fig__leg--hn,
+.deer-fig--rest .deer-fig__leg--hf {
+  transform: rotate(-60deg);
+}
+
+.deer-fig--rest .deer-fig__leg--hn .deer-fig__shin,
+.deer-fig--rest .deer-fig__leg--hf .deer-fig__shin {
+  transform: rotate(150deg);
+}
+
+.deer-fig--rest .deer-fig__neck {
+  transform: rotate(-25deg);
+}
+
+.deer-fig--rest .deer-fig__head {
+  transform: rotate(10deg);
+}
+
+/* Actions: each deer starts its own loop once the line reaches it. Loops have different lengths
+   and long quiet stretches, so the deer never fall into step with each other. */
+@media (prefers-reduced-motion: no-preference) {
+  .is-here .deer-fig__ear {
+    animation: fig-ear-flick 5.3s 0.6s infinite;
+  }
+
+  .is-here .deer-fig__tail {
+    animation: fig-tail-flick 4.1s 1.4s infinite;
+  }
+
+  /* Stand: idles, glances up, paws the ground. */
+  .is-here .deer-fig--stand .deer-fig__neck {
+    animation: fig-stand-neck 8s 0.8s infinite;
+  }
+
+  .is-here .deer-fig--stand .deer-fig__leg--fn {
+    animation: fig-stand-paw 8s 0.8s infinite;
+  }
+
+  .is-here .deer-fig--stand .deer-fig__leg--fn .deer-fig__shin {
+    animation: fig-stand-paw-shin 8s 0.8s infinite;
+  }
+
+  /* Walk: diagonal pairs move together; knees fold as each leg swings forward. */
+  .is-here .deer-fig--walk .deer-fig__leg--fn,
+  .is-here .deer-fig--walk .deer-fig__leg--hf,
+  .is-here .deer-fig--walk .deer-fig__leg--ff,
+  .is-here .deer-fig--walk .deer-fig__leg--hn {
+    animation: fig-stride 1.4s infinite;
+  }
+
+  .is-here .deer-fig--walk .deer-fig__leg--fn .deer-fig__shin,
+  .is-here .deer-fig--walk .deer-fig__leg--ff .deer-fig__shin {
+    animation: fig-stride-knee 1.4s infinite;
+  }
+
+  .is-here .deer-fig--walk .deer-fig__leg--hn .deer-fig__shin,
+  .is-here .deer-fig--walk .deer-fig__leg--hf .deer-fig__shin {
+    animation: fig-stride-hock 1.4s infinite;
+  }
+
+  .is-here .deer-fig--walk .deer-fig__leg--ff,
+  .is-here .deer-fig--walk .deer-fig__leg--hn,
+  .is-here .deer-fig--walk .deer-fig__leg--ff .deer-fig__shin,
+  .is-here .deer-fig--walk .deer-fig__leg--hn .deer-fig__shin {
+    animation-delay: -0.7s;
+  }
+
+  .is-here .deer-fig--walk .deer-fig__body {
+    animation: fig-walk-bob 0.7s infinite;
+  }
+
+  .is-here .deer-fig--walk .deer-fig__neck {
+    animation: fig-walk-nod 0.7s infinite;
+  }
+
+  /* Leap: crouch, push off, tuck, stretch out, land nose-first, then stand a while. */
+  .is-here .deer-fig--leap .deer-fig__body {
+    animation: fig-leap-body 3.6s infinite;
+  }
+
+  .is-here .deer-fig--leap .deer-fig__leg--fn,
+  .is-here .deer-fig--leap .deer-fig__leg--ff {
+    animation: fig-leap-fore 3.6s infinite;
+  }
+
+  .is-here .deer-fig--leap .deer-fig__leg--fn .deer-fig__shin,
+  .is-here .deer-fig--leap .deer-fig__leg--ff .deer-fig__shin {
+    animation: fig-leap-fore-shin 3.6s infinite;
+  }
+
+  .is-here .deer-fig--leap .deer-fig__leg--hn,
+  .is-here .deer-fig--leap .deer-fig__leg--hf {
+    animation: fig-leap-hind 3.6s infinite;
+  }
+
+  .is-here .deer-fig--leap .deer-fig__leg--hn .deer-fig__shin,
+  .is-here .deer-fig--leap .deer-fig__leg--hf .deer-fig__shin {
+    animation: fig-leap-hind-shin 3.6s infinite;
+  }
+
+  .is-here .deer-fig--leap .deer-fig__neck {
+    animation: fig-leap-neck 3.6s infinite;
+  }
+
+  /* Graze: a few nibbles, then head up to look around, then back down. */
+  .is-here .deer-fig--graze .deer-fig__neck {
+    animation: fig-graze-neck 9s infinite;
+  }
+
+  .is-here .deer-fig--graze .deer-fig__head {
+    animation: fig-graze-head 9s infinite;
+  }
+
+  /* Look: glances back over its shoulder, then ahead again. */
+  .is-here .deer-fig--look .deer-fig__neck {
+    animation: fig-look-neck 7s infinite;
+  }
+
+  .is-here .deer-fig--look .deer-fig__head {
+    animation: fig-look-head 7s infinite;
+  }
+
+  /* Rest: slow breathing, and now and then a dozing nod. */
+  .is-here .deer-fig--rest .deer-fig__torso {
+    animation: fig-breathe 4.2s infinite;
+  }
+
+  .is-here .deer-fig--rest .deer-fig__neck {
+    animation: fig-rest-neck 10s 2s infinite;
+  }
+
+  .is-here .deer-fig--rest .deer-fig__head {
+    animation: fig-rest-head 10s 2s infinite;
+  }
+
+  [data-trail-end].is-here .deer-ear-l {
+    animation: trail-ear-twitch 0.6s ease-in-out;
+  }
+
+  [data-trail-end].is-here .deer-ear-r {
+    animation: trail-ear-twitch-r 0.6s 0.1s ease-in-out;
+  }
+}
+
+@keyframes fig-ear-flick {
+  0%,
+  9%,
+  100% {
+    transform: none;
+  }
+  3% {
+    transform: rotate(-22deg);
+  }
+  6% {
+    transform: rotate(6deg);
+  }
+}
+
+@keyframes fig-tail-flick {
+  0%,
+  8%,
+  100% {
+    transform: none;
+  }
+  3% {
+    transform: rotate(-28deg);
+  }
+  6% {
+    transform: rotate(12deg);
+  }
+}
+
+@keyframes fig-stand-neck {
+  0%,
+  38%,
+  100% {
+    transform: none;
+  }
+  46%,
+  58% {
+    transform: rotate(-9deg);
+  }
+  66% {
+    transform: rotate(3deg);
+  }
+  74% {
+    transform: none;
+  }
+}
+
+@keyframes fig-stand-paw {
+  0%,
+  80%,
+  92%,
+  100% {
+    transform: none;
+  }
+  84% {
+    transform: rotate(-14deg);
+  }
+  88% {
+    transform: rotate(-4deg);
+  }
+}
+
+@keyframes fig-stand-paw-shin {
+  0%,
+  80%,
+  92%,
+  100% {
+    transform: none;
+  }
+  84% {
+    transform: rotate(40deg);
+  }
+  88% {
+    transform: rotate(8deg);
+  }
+}
+
+/* Planted and pushing back for the first half, lifted and swung forward in the second. */
+@keyframes fig-stride {
+  0%,
+  100% {
+    transform: rotate(-16deg);
+  }
+  55% {
+    transform: rotate(15deg);
+  }
+  80% {
+    transform: rotate(-8deg);
+  }
+}
+
+@keyframes fig-stride-knee {
+  0%,
+  50%,
+  100% {
+    transform: none;
+  }
+  68% {
+    transform: rotate(48deg);
+  }
+  85% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes fig-stride-hock {
+  0%,
+  50%,
+  100% {
+    transform: none;
+  }
+  68% {
+    transform: rotate(-30deg);
+  }
+  85% {
+    transform: rotate(-6deg);
+  }
+}
+
+@keyframes fig-walk-bob {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: translateY(-2.5px);
+  }
+}
+
+@keyframes fig-walk-nod {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes fig-leap-body {
+  0%,
+  56%,
+  100% {
+    transform: none;
+  }
+  10% {
+    transform: translateY(5px) rotate(4deg);
+  }
+  20% {
+    transform: translateY(-30px) rotate(-13deg);
+  }
+  30% {
+    transform: translateY(-44px) rotate(-2deg);
+  }
+  40% {
+    transform: translateY(-18px) rotate(10deg);
+  }
+  47% {
+    transform: translateY(3px) rotate(2deg);
+  }
+}
+
+@keyframes fig-leap-fore {
+  0%,
+  56%,
+  100% {
+    transform: none;
+  }
+  10% {
+    transform: rotate(12deg);
+  }
+  20% {
+    transform: rotate(-55deg);
+  }
+  30% {
+    transform: rotate(-82deg);
+  }
+  40% {
+    transform: rotate(-28deg);
+  }
+  47% {
+    transform: rotate(-6deg);
+  }
+}
+
+@keyframes fig-leap-fore-shin {
+  0%,
+  40%,
+  100% {
+    transform: none;
+  }
+  10% {
+    transform: rotate(18deg);
+  }
+  20% {
+    transform: rotate(115deg);
+  }
+  30% {
+    transform: rotate(12deg);
+  }
+}
+
+@keyframes fig-leap-hind {
+  0%,
+  56%,
+  100% {
+    transform: none;
+  }
+  10% {
+    transform: rotate(-22deg);
+  }
+  20% {
+    transform: rotate(60deg);
+  }
+  30% {
+    transform: rotate(72deg);
+  }
+  40% {
+    transform: rotate(22deg);
+  }
+  47% {
+    transform: rotate(-8deg);
+  }
+}
+
+@keyframes fig-leap-hind-shin {
+  0%,
+  20%,
+  47%,
+  100% {
+    transform: none;
+  }
+  10% {
+    transform: rotate(-35deg);
+  }
+  36% {
+    transform: rotate(-70deg);
+  }
+}
+
+@keyframes fig-leap-neck {
+  0%,
+  56%,
+  100% {
+    transform: none;
+  }
+  20% {
+    transform: rotate(-12deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes fig-graze-neck {
+  0%,
+  16%,
+  32%,
+  72%,
+  88%,
+  100% {
+    transform: rotate(110deg);
+  }
+  8%,
+  24%,
+  80% {
+    transform: rotate(104deg);
+  }
+  44%,
+  60% {
+    transform: rotate(-6deg);
+  }
+}
+
+@keyframes fig-graze-head {
+  0%,
+  32%,
+  72%,
+  100% {
+    transform: rotate(-12deg);
+  }
+  44%,
+  60% {
+    transform: none;
+  }
+}
+
+@keyframes fig-look-neck {
+  0%,
+  34%,
+  92%,
+  100% {
+    transform: rotate(-12deg);
+  }
+  44%,
+  82% {
+    transform: none;
+  }
+}
+
+/* Scaling through zero reads as the head turning. */
+@keyframes fig-look-head {
+  0%,
+  34%,
+  92%,
+  100% {
+    transform: scaleX(-1) rotate(-8deg);
+  }
+  44%,
+  82% {
+    transform: none;
+  }
+}
+
+@keyframes fig-breathe {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: scaleY(1.04);
+  }
+}
+
+@keyframes fig-rest-neck {
+  0%,
+  50%,
+  86%,
+  100% {
+    transform: rotate(-25deg);
+  }
+  62%,
+  74% {
+    transform: rotate(-6deg);
+  }
+}
+
+@keyframes fig-rest-head {
+  0%,
+  50%,
+  86%,
+  100% {
+    transform: rotate(10deg);
+  }
+  62%,
+  74% {
+    transform: rotate(32deg);
+  }
+}
+
+@keyframes trail-ear-twitch {
+  35% {
+    transform: rotate(14deg);
+  }
+  70% {
+    transform: rotate(-3deg);
+  }
+}
+
+@keyframes trail-ear-twitch-r {
+  35% {
+    transform: rotate(-14deg);
+  }
+  70% {
+    transform: rotate(3deg);
+  }
+}

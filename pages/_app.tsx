@@ -4,6 +4,7 @@ import { M_PLUS_Rounded_1c, Source_Sans_3 } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import Layout from '../components/layout';
 import '../styles/globals.css';
+import '../styles/deer-trail.css';
 
 const rounded = M_PLUS_Rounded_1c({ weight: ['500', '700', '800'], subsets: ['latin'], display: 'swap', variable: '--font-rounded' });
 const sans = Source_Sans_3({ subsets: ['latin'], display: 'swap', variable: '--font-sans' });

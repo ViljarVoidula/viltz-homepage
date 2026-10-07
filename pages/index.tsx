@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Deer from '../components/deer';
+import DeerTrail from '../components/deer-trail';
 import Experience from '../components/experience';
 import ImpactList from '../components/impact-list';
 import Projects from '../components/projects';
@@ -66,11 +67,13 @@ const Home = () => (
         </p>
       </div>
       <div className={styles.deerCol}>
-        <div className={styles.deer}>
-          <Deer width={260} alt="Geometric deer head — Viljar’s emblem" gaze />
+        <div className={styles.deer} data-trail-start>
+          <Deer width={260} alt="Geometric deer head — Viljar’s emblem" />
         </div>
       </div>
     </section>
+
+    <DeerTrail />
 
     <div className={`reveal ${styles.current}`}>
       <Image src="/images/viljar.jpg" alt={`Portrait of ${profile.name}`} width={64} height={64} className={styles.portrait} />

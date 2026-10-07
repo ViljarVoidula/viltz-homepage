@@ -34,6 +34,11 @@
   }
 }
 
+/* The homepage trail draws its own progress, so the bar steps aside while it's shown. */
+:global(body:has(.deer-trail)) .progress {
+  display: none;
+}
+
 /* Sticky header */
 .headerBar {
   position: sticky;
@@ -240,17 +245,11 @@
   max-width: 260px;
 }
 
+/* Kept still: the scroll trail runs out of its chin. */
 .deer svg {
   width: 100%;
   height: auto;
   display: block;
-  /* --gaze-x/--gaze-y are set by <Deer gaze> as the pointer moves. */
-  transform: perspective(900px) rotateX(var(--gaze-x, 0deg)) rotateY(var(--gaze-y, 0deg));
-  transition: transform 0.8s var(--ease);
-}
-
-.deer:hover svg {
-  transform: perspective(900px) rotateX(var(--gaze-x, 0deg)) rotateY(var(--gaze-y, 0deg)) scale(1.03) rotate(-1.5deg);
 }
 
 @media (max-width: 720px) {

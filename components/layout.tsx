@@ -74,7 +74,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
       </main>
       <footer className={styles.wrap}>
         <div className={styles.footer}>
-          <span className={styles.footerBrand}>
+          <span className={styles.footerBrand} data-trail-end>
             <Deer width={26} className={styles.mark} />
             <span>
               {profile.name} · <a href={`mailto:${profile.email}`}>{profile.email}</a>
