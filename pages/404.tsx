@@ -7,6 +7,7 @@ const NotFound = () => (
   <>
     <Head>
       <title>Not found — Viljar Võidula</title>
+      <meta name="robots" content="noindex" />
     </Head>
     <div className={styles.notFound}>
       <Deer width={96} />

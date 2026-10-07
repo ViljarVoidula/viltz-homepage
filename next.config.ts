@@ -17,7 +17,14 @@ const nextConfig: NextConfig = {
     { source: '/work', destination: '/#projects', permanent: true },
     { source: '/work/:slug', destination: '/#projects', permanent: true }
   ],
+  // Machine-readable views of the CV for crawlers and language models (pages/api).
+  rewrites: async () => [
+    { source: '/sitemap.xml', destination: '/api/sitemap' },
+    { source: '/llms.txt', destination: '/api/llms' },
+    { source: '/llms-full.txt', destination: '/api/llms?full=1' }
+  ],
   env: {
+    BUILD_DATE: new Date().toISOString().slice(0, 10),
     HOSTNAME: process.env.HOSTNAME,
     OCULAR_URL: process.env.OCULAR_URL
   }

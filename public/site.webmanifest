@@ -1,6 +1,10 @@
 {
   "name": "Viljar Võidula — CV",
   "short_name": "Viljar Võidula",
+  "description": "Senior technical product manager in Estonia for platforms, APIs and AI. Available for contract and fractional work.",
+  "id": "/",
+  "start_url": "/",
+  "lang": "en",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

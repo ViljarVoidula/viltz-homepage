@@ -8,37 +8,47 @@ import Projects from '../components/projects';
 import Section from '../components/section';
 import WorkWithMe from '../components/work-with-me';
 import { books, contract, education, metrics, otherImpact, photos, principles, profile, skills, talks } from '../lib/cv';
+import { structuredData } from '../lib/structured-data';
 import styles from '../styles/cv.module.css';
 
-const description = `${profile.name} — ${profile.title}. Available for contract and fractional work. ${profile.summary}`;
-
-const personSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: profile.name,
-  jobTitle: 'Senior Technical Product Manager',
-  url: profile.url,
-  email: `mailto:${profile.email}`,
-  image: `${profile.url}images/viljar.jpg`,
-  address: { '@type': 'PostalAddress', addressCountry: 'EE' },
-  sameAs: [profile.linkedin, profile.github]
-};
+const title = `${profile.name} — ${profile.title}`;
+// Kept under ~160 characters so search results show it whole.
+const description =
+  'Senior technical product manager in Estonia for platforms, APIs and AI. Former staff engineer and interim CTO, available for contract and fractional work.';
+const ogImage = `${profile.url}og.png`;
+const ogImageAlt = `${profile.name} — ${profile.title}. Available for contract work.`;
 
 const Home = () => (
   <>
     <Head>
-      <title>{`${profile.name} — ${profile.title}`}</title>
+      <title>{title}</title>
       <meta name="description" content={description} />
+      <meta name="author" content={profile.name} />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
       <link rel="canonical" href={profile.url} />
+      <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="CV in Markdown" />
+
       <meta property="og:type" content="profile" />
       <meta property="og:locale" content="en_US" />
       <meta property="og:url" content={profile.url} />
-      <meta property="og:site_name" content={`${profile.name} — CV`} />
-      <meta property="og:title" content={`${profile.name} — ${profile.title}`} />
+      <meta property="og:site_name" content={profile.name} />
+      <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={`${profile.url}images/viljar.jpg`} />
-      <meta name="twitter:card" content="summary" />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={ogImageAlt} />
+      <meta property="profile:first_name" content="Viljar" />
+      <meta property="profile:last_name" content="Võidula" />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={ogImage} />
+      <meta name="twitter:image:alt" content={ogImageAlt} />
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
     </Head>
 
     <section className={styles.hero}>

@@ -10,6 +10,7 @@
     "dev": "next dev -H 0.0.0.0",
     "build": "next build --webpack",
     "typecheck": "tsc --noEmit",
+    "og": "node scripts/og-image.mjs",
     "start": "next start",
     "prettier": "prettier -w .",
     "lint": "eslint ."

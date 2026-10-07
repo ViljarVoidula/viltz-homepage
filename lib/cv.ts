@@ -8,7 +8,7 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/viljar-voidula',
   github: 'https://github.com/ViljarVoidula',
   location: 'Tallinn / Paide, Estonia',
-  url: 'https://www.viltz.ee/'
+  url: 'https://viltz.ee/'
 };
 
 export const contract = {
