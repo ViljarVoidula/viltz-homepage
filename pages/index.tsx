@@ -6,7 +6,7 @@ import ImpactList from '../components/impact-list';
 import Projects from '../components/projects';
 import Section from '../components/section';
 import WorkWithMe from '../components/work-with-me';
-import { books, contract, education, metrics, otherImpact, photos, principles, profile, skills } from '../lib/cv';
+import { books, contract, education, metrics, otherImpact, photos, principles, profile, skills, talks } from '../lib/cv';
 import styles from '../styles/cv.module.css';
 
 const description = `${profile.name} — ${profile.title}. Available for contract and fractional work. ${profile.summary}`;
@@ -127,6 +127,25 @@ const Home = () => (
       <Projects />
     </Section>
 
+    <Section id="speaking" title="Speaking">
+      {talks.map(talk => (
+        <a key={talk.url} href={talk.url} className={`reveal-item ${styles.talk}`} target="_blank" rel="noopener noreferrer">
+          <div className={`${styles.frame} ${styles.talkThumb}`}>
+            <Image src={talk.thumbnail} alt={`Video: ${talk.title}, ${talk.event}`} width={640} height={360} sizes="(max-width: 700px) 100vw, 360px" />
+            <span className={styles.play} aria-hidden="true" />
+          </div>
+          <span>
+            <span className={styles.talkTitle}>{talk.title}</span>
+            <span className={styles.meta}>
+              {talk.event} · {talk.date}
+            </span>
+            <span className={styles.talkSummary}>{talk.summary}</span>
+            <span className={styles.projectLink}>Watch on YouTube</span>
+          </span>
+        </a>
+      ))}
+    </Section>
+
     <Section id="personal" title="Personal">
       <dl className={styles.rows}>
         <div className={styles.row}>
@@ -170,7 +189,7 @@ const Home = () => (
     <Section id="books" title="Books I love" last>
       <div className={styles.shelf}>
         {books.map(book => (
-          <a key={book.title} href={book.url} className={styles.book}>
+          <a key={book.title} href={book.url} className={styles.book} target="_blank" rel="noopener noreferrer">
             <Image src={book.cover} alt={`Cover of ${book.title}`} width={200} height={300} sizes="(max-width: 700px) 40vw, 160px" />
             <span>
               <span className={styles.bookTitle}>{book.title}</span>

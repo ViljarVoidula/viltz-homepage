@@ -16,7 +16,7 @@ const nav = [
 ];
 
 // Sections without a nav entry count towards the link above them.
-const navFor: Record<string, string> = { how: 'skills' };
+const navFor: Record<string, string> = { how: 'skills', speaking: 'projects' };
 
 // The section whose top has passed just under the sticky header.
 const useActiveSection = () => {

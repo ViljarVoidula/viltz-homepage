@@ -257,6 +257,17 @@ export const photos = [
   { src: '/images/hobbies/snowboard.png', alt: 'Viljar resting in the snow with a snowboard', caption: '18 years on a snowboard' }
 ];
 
+export const talks = [
+  {
+    title: 'Don’t Panic!',
+    event: 'Claude Code Meetup Tallinn',
+    date: 'Early 2026',
+    summary: 'An intro to AI coding agents for teams stuck with GitHub Copilot: what changes, where to start and what to watch out for.',
+    url: 'https://youtu.be/eLcrLkdgcDE',
+    thumbnail: '/images/talks/dont-panic.jpg'
+  }
+];
+
 export const books = [
   {
     title: 'The Emperor’s Handbook',
@@ -282,5 +293,52 @@ export const books = [
     cover: '/images/books/mythical-man-month.jpg',
     url: 'https://www.amazon.com/Mythical-Man-Month-Software-Engineering-Anniversary/dp/0201835959'
   },
-  { title: 'Brave New World', author: 'Aldous Huxley', cover: '/images/books/brave-new-world.jpg', url: 'https://en.wikipedia.org/wiki/Brave_New_World' }
+  {
+    title: 'Brave New World',
+    author: 'Aldous Huxley',
+    cover: '/images/books/brave-new-world.jpg',
+    url: 'https://en.wikipedia.org/wiki/Brave_New_World'
+  },
+  {
+    title: 'Steppenwolf',
+    author: 'Hermann Hesse',
+    cover: '/images/books/steppenwolf.jpg',
+    url: 'https://en.wikipedia.org/wiki/Steppenwolf_(novel)'
+  },
+  {
+    title: 'The Foundation series',
+    author: 'Isaac Asimov',
+    cover: '/images/books/foundation.jpg',
+    url: 'https://en.wikipedia.org/wiki/Foundation_series'
+  },
+  {
+    title: 'Thus Spoke Zarathustra',
+    author: 'Friedrich Nietzsche',
+    cover: '/images/books/thus-spoke-zarathustra.jpg',
+    url: 'https://en.wikipedia.org/wiki/Thus_Spoke_Zarathustra'
+  },
+  {
+    title: 'The Design of Everyday Things',
+    author: 'Don Norman',
+    cover: '/images/books/design-of-everyday-things.jpg',
+    url: 'https://en.wikipedia.org/wiki/The_Design_of_Everyday_Things'
+  },
+  {
+    title: 'The Wealth of Nations',
+    author: 'Adam Smith',
+    cover: '/images/books/wealth-of-nations.jpg',
+    url: 'https://en.wikipedia.org/wiki/The_Wealth_of_Nations'
+  },
+  {
+    title: '1984',
+    author: 'George Orwell',
+    cover: '/images/books/1984.jpg',
+    url: 'https://en.wikipedia.org/wiki/Nineteen_Eighty-Four'
+  },
+  {
+    title: 'Animal Farm',
+    author: 'George Orwell',
+    cover: '/images/books/animal-farm.jpg',
+    url: 'https://en.wikipedia.org/wiki/Animal_Farm'
+  }
 ];
