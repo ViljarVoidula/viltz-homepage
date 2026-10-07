@@ -79,10 +79,30 @@ button:focus-visible {
   outline-offset: 3px;
 }
 
-/* Light/dark image pairs: both are rendered, CSS shows the one for the active theme. */
-:root.dark .only-light,
-:root:not(.dark) .only-dark {
-  display: none;
+.deer-mark {
+  fill: var(--ink);
+  transition: fill 0.3s;
+}
+
+/* Pivots for the deer's moving parts, in the 640×778 viewBox. */
+.deer-mark g {
+  transform-box: view-box;
+}
+
+.deer-antler-l {
+  transform-origin: 215px 470px;
+}
+
+.deer-antler-r {
+  transform-origin: 362px 470px;
+}
+
+.deer-ear-l {
+  transform-origin: 155px 546px;
+}
+
+.deer-ear-r {
+  transform-origin: 424px 544px;
 }
 
 @keyframes rise {
@@ -104,22 +124,6 @@ button:focus-visible {
   to {
     opacity: 1;
     transform: none;
-  }
-}
-
-@keyframes grow {
-  to {
-    transform: scaleX(1);
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    translate: 0 0;
-  }
-  50% {
-    translate: 0 -8px;
   }
 }
 

@@ -240,15 +240,17 @@
   max-width: 260px;
 }
 
-.deer img {
+.deer svg {
   width: 100%;
   height: auto;
   display: block;
+  /* --gaze-x/--gaze-y are set by <Deer gaze> as the pointer moves. */
+  transform: perspective(900px) rotateX(var(--gaze-x, 0deg)) rotateY(var(--gaze-y, 0deg));
   transition: transform 0.8s var(--ease);
 }
 
-.deer:hover img {
-  transform: scale(1.03) rotate(-1.5deg);
+.deer:hover svg {
+  transform: perspective(900px) rotateX(var(--gaze-x, 0deg)) rotateY(var(--gaze-y, 0deg)) scale(1.03) rotate(-1.5deg);
 }
 
 @media (max-width: 720px) {
@@ -282,8 +284,115 @@
     animation: rise 0.9s 0.3s var(--ease) both;
   }
 
-  .deer {
-    animation: float 7s 1.4s ease-in-out infinite;
+  .deer :global(.deer-antler-l) {
+    animation: antler-grow-l 1.1s 0.7s var(--ease) both;
+  }
+
+  .deer :global(.deer-antler-r) {
+    animation: antler-grow-r 1.1s 0.8s var(--ease) both;
+  }
+
+  /* Different periods so the ears never settle into a visible rhythm. */
+  .deer :global(.deer-ear-l) {
+    animation: ear-flick-l 9s 1.9s ease-in-out infinite;
+  }
+
+  .deer :global(.deer-ear-r) {
+    animation: ear-flick-r 13s 5.5s ease-in-out infinite;
+  }
+
+  .brand:hover .mark :global(.deer-ear-l) {
+    animation: ear-twitch-l 0.6s ease-in-out;
+  }
+
+  .brand:hover .mark :global(.deer-ear-r) {
+    animation: ear-twitch-r 0.6s 0.1s ease-in-out;
+  }
+}
+
+/* Keyframes must live in this file: CSS Modules renames animation names to local ones. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes grow {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Antlers unfold outwards from their base. */
+@keyframes antler-grow-l {
+  from {
+    opacity: 0;
+    transform: rotate(10deg) scale(0.5);
+  }
+}
+
+@keyframes antler-grow-r {
+  from {
+    opacity: 0;
+    transform: rotate(-10deg) scale(0.5);
+  }
+}
+
+/* A double flick at the start of each cycle, then rest. */
+@keyframes ear-flick-l {
+  0%,
+  10.5%,
+  100% {
+    transform: none;
+  }
+  3% {
+    transform: rotate(10deg);
+  }
+  5.5% {
+    transform: rotate(-3deg);
+  }
+  8% {
+    transform: rotate(6deg);
+  }
+}
+
+@keyframes ear-flick-r {
+  0%,
+  10.5%,
+  100% {
+    transform: none;
+  }
+  3% {
+    transform: rotate(-10deg);
+  }
+  5.5% {
+    transform: rotate(3deg);
+  }
+  8% {
+    transform: rotate(-6deg);
+  }
+}
+
+@keyframes ear-twitch-l {
+  35% {
+    transform: rotate(14deg);
+  }
+  70% {
+    transform: rotate(-3deg);
+  }
+}
+
+@keyframes ear-twitch-r {
+  35% {
+    transform: rotate(-14deg);
+  }
+  70% {
+    transform: rotate(3deg);
   }
 }
 

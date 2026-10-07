@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useEffect, useState, type ReactNode } from 'react';
 import { profile } from '../lib/cv';
 import styles from '../styles/cv.module.css';
-import Deer from './deer';
+import Deer, { DeerSymbol } from './deer';
 import ThemeToggle from './theme-toggle';
 
 const nav = [
@@ -51,6 +51,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
 
   return (
     <>
+      <DeerSymbol />
       <div className={styles.progress} aria-hidden="true" />
       <header className={styles.headerBar}>
         <div className={`${styles.wrap} ${styles.header}`}>

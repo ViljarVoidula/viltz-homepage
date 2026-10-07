@@ -67,7 +67,7 @@ const Home = () => (
       </div>
       <div className={styles.deerCol}>
         <div className={styles.deer}>
-          <Deer width={260} alt="Geometric deer head — Viljar’s emblem" sizes="260px" eager />
+          <Deer width={260} alt="Geometric deer head — Viljar’s emblem" gaze />
         </div>
       </div>
     </section>
