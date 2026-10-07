@@ -1,2 +1,5 @@
 node_modules
 .next
+.kilo
+public/sw.js
+public/swe-worker-*.js

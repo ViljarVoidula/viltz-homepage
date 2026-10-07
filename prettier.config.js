@@ -7,7 +7,7 @@ const options = {
   bracketSpacing: true,
   singleQuote: true,
   arrowParens: 'avoid',
-  jsxBracketSameLine: false
+  bracketSameLine: false
 };
 
 module.exports = options;

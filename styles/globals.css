@@ -1,0 +1,147 @@
+:root {
+  --bg: #f0e7db;
+  --ink: #22201c;
+  --ink2: #3b3731;
+  --muted: #5f584d;
+  --rule: #d9cdbb;
+  --rule2: #e4dacb;
+  --hover: #e8ddcd;
+  --accent: #234fa8;
+  --accent-hover: #1a3c80;
+  --bar: rgb(240 231 219 / 0.92);
+  --toggle-bg: #805ad5;
+  --toggle-fg: #ffffff;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  color-scheme: light;
+}
+
+:root.dark {
+  --bg: #202023;
+  --ink: #edeae4;
+  --ink2: #cfcbc3;
+  --muted: #b5b0a7;
+  --rule: #38383e;
+  --rule2: #2e2e33;
+  --hover: #29292d;
+  --accent: #ff63c3;
+  --accent-hover: #ff8dd3;
+  --bar: rgb(32 32 35 / 0.92);
+  --toggle-bg: #ed8936;
+  --toggle-fg: #202023;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color 0.5s,
+    color 0.5s;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  text-decoration-thickness: 2px;
+}
+
+button {
+  font: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Light/dark image pairs: both are rendered, CSS shows the one for the active theme. */
+:root.dark .only-light,
+:root:not(.dark) .only-dark {
+  display: none;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes grow {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -8px;
+  }
+}
+
+/* Scroll-linked reveal; browsers without scroll timelines simply show the content. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+
+    .reveal-item {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 45%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
