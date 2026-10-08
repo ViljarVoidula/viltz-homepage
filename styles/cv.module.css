@@ -34,8 +34,8 @@
   }
 }
 
-/* The homepage trail draws its own progress, so the bar steps aside while it's shown. */
-:global(body:has(.deer-trail)) .progress {
+/* The homepage trail (or its phone track) draws its own progress, so the bar steps aside while it's shown. */
+:global(body:has(.deer-trail, .deer-track)) .progress {
   display: none;
 }
 
@@ -1126,6 +1126,11 @@
 .footerBand .footer {
   padding-block: 48px 64px;
   border-top: none;
+}
+
+/* Room for the phone track's resting deer under the last row. */
+:global(body:has(.deer-track)) .footerBand .footer {
+  padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
 }
 
 .footerBrand {

@@ -5,6 +5,8 @@
 # font downloads, stalling the build for minutes. The runtime stays on Alpine.
 FROM node:24-slim AS build-base
 ENV NEXT_TELEMETRY_DISABLED=1
+# pnpm at the version pinned in package.json's packageManager.
+RUN corepack enable pnpm
 
 FROM node:24-alpine AS base
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -12,19 +14,21 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # Install dependencies only when the lockfile changes
 FROM build-base AS deps
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN --mount=type=cache,target=/usr/local/share/.cache/yarn \
-    yarn install --frozen-lockfile
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN --mount=type=cache,id=pnpm-store,target=/pnpm/store \
+    pnpm install --frozen-lockfile --store-dir /pnpm/store
 
 # Build the standalone output
 FROM build-base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN yarn build \
-    # yarn v1 installs sharp's glibc binaries too; Alpine only uses the musl ones.
-    && rm -rf .next/standalone/node_modules/@img/sharp-linux-* \
-              .next/standalone/node_modules/@img/sharp-libvips-linux-*
+RUN pnpm build \
+    # sharp's glibc binaries are installed for the build stage; Alpine only uses the musl ones.
+    && rm -rf .next/standalone/node_modules/.pnpm/@img+sharp-linux-* \
+              .next/standalone/node_modules/.pnpm/@img+sharp-libvips-linux-* \
+              .next/standalone/node_modules/.pnpm/node_modules/@img/sharp-linux-* \
+              .next/standalone/node_modules/.pnpm/node_modules/@img/sharp-libvips-linux-*
 
 # Production image, copy all the files and run next
 FROM base AS runner

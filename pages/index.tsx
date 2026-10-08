@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Deer from '../components/deer';
+import DeerTrack from '../components/deer-track';
 import DeerTrail from '../components/deer-trail';
 import Experience from '../components/experience';
 import ImpactList from '../components/impact-list';
@@ -84,6 +85,7 @@ const Home = () => (
     </section>
 
     <DeerTrail />
+    <DeerTrack />
 
     <div className={`reveal ${styles.current}`}>
       <Image src="/images/viljar.jpg" alt={`Portrait of ${profile.name}`} width={64} height={64} className={styles.portrait} />

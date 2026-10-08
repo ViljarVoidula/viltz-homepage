@@ -2,7 +2,8 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import DeerFigure, { type DeerPose } from './deer-figure';
 
 // Which deer waits beside which section. Sides alternate, starting on the right under the hero deer.
-const stations: { section: string; pose: DeerPose }[] = [
+// The phone track (components/deer-track.tsx) visits the same sections.
+export const stations: { section: string; pose: DeerPose }[] = [
   { section: 'impact', pose: 'stand' },
   { section: 'work', pose: 'walk' },
   { section: 'experience', pose: 'leap' },
@@ -58,6 +59,18 @@ const docRect = (el: HTMLElement) => {
   return { left, right: left + el.offsetWidth, top, bottom: top + el.offsetHeight, height: el.offsetHeight };
 };
 
+// The content column's edges on the page.
+const contentEdges = (main: HTMLElement) => {
+  const padding = parseFloat(getComputedStyle(main).paddingLeft);
+  return { left: docRect(main).left + padding, right: docRect(main).right - padding };
+};
+
+// Whether both gutters can hold a deer; when they can't, the phone track takes over.
+export const trailFits = () => {
+  const main = document.querySelector('main');
+  return !!main && contentEdges(main).left >= FIG_W + 30;
+};
+
 // Measures the page and plans the route: down from the hero deer's chin, across each section's top
 // padding to the next gutter, under each waiting deer like a patch of ground, and into the footer deer.
 // Both gutters must fit a deer plus the line on either side of it.
@@ -68,10 +81,8 @@ const measure = (): Layout | null => {
   if (!main || !start || !end) return null;
 
   const width = document.documentElement.clientWidth;
-  const padding = parseFloat(getComputedStyle(main).paddingLeft);
-  const content = { left: docRect(main).left + padding, right: docRect(main).right - padding };
-  // Only draw when both gutters can hold a deer.
-  if (content.left < FIG_W + 30) return null;
+  if (!trailFits()) return null;
+  const content = contentEdges(main);
 
   // Banded sections never transform themselves (components/section.tsx), so these edges are final.
   const bands = Array.from(document.querySelectorAll<HTMLElement>('[data-band="inverse"]'), el => {

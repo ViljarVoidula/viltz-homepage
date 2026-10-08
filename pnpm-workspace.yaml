@@ -1,0 +1,12 @@
+onlyBuiltDependencies:
+  - unrs-resolver
+
+# The image builds on glibc but runs on Alpine (musl): install sharp's binaries for both.
+supportedArchitectures:
+  os:
+    - current
+  cpu:
+    - current
+  libc:
+    - glibc
+    - musl

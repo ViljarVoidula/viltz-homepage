@@ -56,6 +56,91 @@
   transform: none;
 }
 
+/* Phone track: the trail's line along the foot of the screen, with a small deer at its tip
+   (components/deer-track.tsx). Hooves stand on the line: the figure's ground is 2px above its foot. */
+.deer-track {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: env(safe-area-inset-bottom, 0px);
+  height: 56px;
+  z-index: 15;
+  pointer-events: none;
+  color: var(--ink);
+}
+
+/* A soft floor of page colour so the line and deer read over the text scrolling under them. */
+.deer-track::before {
+  content: '';
+  position: absolute;
+  inset: auto -16px 0;
+  height: 22px;
+  background: linear-gradient(to top, var(--bg) 40%, transparent);
+  transition: background 0.3s;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .deer-track {
+    animation: trail-in 0.8s 0.6s ease both;
+  }
+}
+
+.deer-track__rail,
+.deer-track__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.deer-track__rail {
+  background: var(--rule);
+  transition: background 0.3s;
+}
+
+.deer-track__line {
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: background 0.3s;
+}
+
+.deer-track__tick {
+  position: absolute;
+  bottom: 4px;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  border: 2px solid var(--rule);
+  border-radius: 50%;
+  background: var(--bg);
+  transition:
+    border-color 0.3s,
+    background 0.3s,
+    transform 0.4s var(--ease);
+}
+
+.deer-track__tick.is-passed {
+  border-color: var(--ink);
+  background: var(--ink);
+  transform: scale(1.15);
+}
+
+.deer-track__deer {
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+  will-change: transform;
+}
+
+@media print {
+  .deer-track {
+    display: none;
+  }
+}
+
 /* Figure */
 .deer-fig {
   display: block;

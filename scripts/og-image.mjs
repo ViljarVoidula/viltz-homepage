@@ -1,5 +1,5 @@
 // Renders the social preview card (public/og.png, 1200×630) used for og:image and twitter:image.
-// Run `yarn og` after changing the name, title or emblem, and commit the PNG.
+// Run `pnpm og` after changing the name, title or emblem, and commit the PNG.
 import { readFile, writeFile } from 'node:fs/promises';
 import { createElement as h } from 'react';
 import { ImageResponse } from 'next/dist/compiled/@vercel/og/index.node.js';
