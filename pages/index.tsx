@@ -16,7 +16,7 @@ const title = `${profile.name} — ${profile.title}`;
 // Kept under ~160 characters so search results show it whole.
 const description =
   'Engineering leader in Estonia: team lead, staff engineer, interim CTO, founder. Platforms, product delivery and AI. Open to contract and fractional work.';
-const ogImage = `${profile.url}og.png`;
+const ogImage = `${profile.url}og.png?v=${process.env.OG_VERSION}`;
 const ogImageAlt = `${profile.name} — ${profile.title}. Available for contract work.`;
 
 const Home = () => (
