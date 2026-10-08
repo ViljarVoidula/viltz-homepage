@@ -93,7 +93,7 @@ export const llmsFullTxt = () =>
     '',
     '## Personal',
     '',
-    '- Languages: Estonian (native), English (fluent), German (basic)',
+    '- Languages: Estonian (native), English (proficient), German (low proficiency)',
     '- Licensed private pilot, PPL(A). Snowboarding for 18 years. Helped build the handmade log house that is home.',
     `- Books: ${books.map(book => `${book.title} (${book.author})`).join('; ')}`,
     ''

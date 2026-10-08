@@ -49,10 +49,10 @@ const card = h('div', { style: { width: '100%', height: '100%', display: 'flex',
       [h('div', { style: { width: 14, height: 14, borderRadius: 7, background: c.green, marginRight: 12 } }), 'Available for contract work']
     ),
     h('div', { style: { fontFamily: 'Rounded', fontSize: 96, lineHeight: 1.05, marginTop: 34, letterSpacing: -1 } }, 'Viljar Võidula'),
-    h('div', { style: { fontSize: 40, fontWeight: 600, color: c.ink2, marginTop: 14 } }, 'Senior Technical Product Manager'),
-    h('div', { style: { fontSize: 40, fontWeight: 600, color: c.accent } }, 'Platforms, APIs & AI'),
+    h('div', { style: { fontSize: 40, fontWeight: 600, color: c.ink2, marginTop: 14 } }, 'Engineering Leadership'),
+    h('div', { style: { fontSize: 40, fontWeight: 600, color: c.accent } }, 'Product Delivery · Platforms & AI'),
     h('div', { style: { display: 'flex', marginTop: 44 } }, [
-      metric('70×', 'decisioning scale'),
+      metric('70×', 'assignment-engine scale'),
       metric('+8%', 'conversion vs Algolia'),
       h('div', { style: { display: 'flex', flexDirection: 'column' } }, [
         h('div', { style: { fontFamily: 'Rounded', fontSize: 40 } }, '€2.5M'),

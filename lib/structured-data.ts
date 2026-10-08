@@ -33,7 +33,7 @@ export const structuredData = {
       alternateName: 'Viljar Voidula',
       givenName: 'Viljar',
       familyName: 'Võidula',
-      jobTitle: 'Senior Technical Product Manager',
+      jobTitle: 'Engineering Leader',
       description: profile.summary,
       url: profile.url,
       email: `mailto:${profile.email}`,

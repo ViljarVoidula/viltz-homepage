@@ -1,9 +1,9 @@
 export const profile = {
   name: 'Viljar Võidula',
-  title: 'Senior Technical Product Manager · Platforms, APIs & AI',
+  title: 'Engineering Leadership · Product Delivery · Platforms & AI',
   greeting: 'Hello, I am a software development enthusiast based in Estonia.',
   summary:
-    'Technical product manager who came up through engineering — solutions architect, staff engineer and team lead, then interim CTO and founder. Strongest at rule-driven decisioning, matching quality and API contract design in regulated identity workflows.',
+    'Engineering leader with experience as a team lead, staff engineer, interim CTO and founder in product companies. I develop engineers through coaching, feedback and real ownership, and stay responsible from problem definition through delivery and operations — scalable systems and AI products with measurable customer impact.',
   email: 'viljar@5xer.com',
   linkedin: 'https://www.linkedin.com/in/viljar-voidula',
   github: 'https://github.com/ViljarVoidula',
@@ -17,16 +17,16 @@ export const contract = {
     'Hi Viljar,\n\nProject:\nTimeline:\nBudget range:\nHow you found me:\n'
   )}`,
   pitch:
-    'I take on contract and fractional work where product and engineering meet — usually when a team needs someone who can write the spec, design the system and stay through delivery.',
+    'I take on contract and fractional work where engineering, product and the business meet — usually when a team needs someone to set direction, design the system and stay through delivery and operations.',
   offers: [
-    { title: 'Product discovery & specs', body: 'Turn a fuzzy problem into a written spec: schema, rules, failure cases and what “done” means.' },
-    { title: 'Decisioning & matching systems', body: 'Routing, assignment and matching engines — measured with precision, recall and false-positive cost.' },
-    { title: 'API & integration design', body: 'REST/GraphQL contracts, webhooks and versioning that partner teams can build against without you.' },
+    { title: 'Interim CTO & engineering leadership', body: 'Set priorities and ownership through a growth phase, and coach the team that carries it forward.' },
+    { title: 'Architecture & platform', body: 'Distributed systems, GraphQL APIs, Kubernetes and AWS — designed to scale, observable and cost-aware.' },
+    { title: 'Assignment & decisioning systems', body: 'Task-distribution, routing and matching engines that hold up at volume, with low latency and auditable decisions.' },
     {
-      title: 'AI transformation & adoption',
+      title: 'AI products & adoption',
       body: 'Find where LLM workflows actually pay off, build them with human review where mistakes are costly, and get the team using them.'
     },
-    { title: 'Interim CTO & due diligence', body: 'Technical leadership through a growth phase, or the technical side of a funding round.' }
+    { title: 'Technical due diligence', body: 'The technical side of a funding round or acquisition — from either side of the table.' }
   ],
   terms: [
     { label: 'Engagement', value: 'Fractional or fixed project' },
@@ -48,37 +48,37 @@ export const metrics: Metric[] = [
   {
     metric: '70×',
     count: { to: 70, suffix: '×' },
-    title: 'Decisioning at scale',
-    body: 'Veriff’s task-assignment engine, routing verification sessions to reviewers under SLA — scaled from 10,000 to 700,000+ sessions at sub-second latency.'
+    title: 'Scale',
+    body: 'Built Veriff’s task-assignment engine and helped scale it from 10,000 to 700,000+ sessions with sub-second distribution latency.'
   },
   {
     metric: '+8%',
     count: { to: 8, prefix: '+', suffix: '%' },
-    title: 'Matching beat Algolia',
-    body: 'Owned matching and relevance for an AI search product that won a customer A/B test against Algolia and lifted conversion by about 8%.'
+    title: 'Product results',
+    body: 'Helped launch Miros’ AI search product, which beat Algolia in a customer A/B test and lifted conversion by approximately 8%.'
+  },
+  {
+    metric: '99.999%',
+    count: { to: 99.999, decimals: 3, suffix: '%' },
+    title: 'Reliability and cost',
+    body: 'Maintained five-nines availability for major retail customers while reducing AWS spend.'
   },
   {
     metric: '€2.5M',
     count: { to: 2.5, decimals: 1, prefix: '€', suffix: 'M' },
     title: 'Funding round',
-    body: 'As interim CTO, led customer, partner and investor conversations, including technical due diligence for a €2.5M round.'
-  },
-  {
-    metric: '99.999%',
-    count: { to: 99.999, decimals: 3, suffix: '%' },
-    title: 'Availability',
-    body: 'Held five-nines availability for major retail customers while reducing AWS spend.'
+    body: 'As interim CTO, led investor technical due diligence for a successful €2.5M round.'
   }
 ];
 
 export const otherImpact: { title: string; body: string }[] = [
   {
-    title: 'Measurement for detection quality.',
-    body: 'Designed an Airbyte, Amazon RDS and BigQuery platform processing millions of events per hour, used to validate algorithm behaviour in SQL.'
+    title: 'People and organisational leadership.',
+    body: 'Led and coached engineers at Veriff; set company-wide engineering priorities as interim CTO at Miros.'
   },
   {
-    title: 'LLM automation with guardrails.',
-    body: 'Workflows that turn unstructured signals into reviewable, high-precision output, with human review to contain costly false positives.'
+    title: 'Data platform.',
+    body: 'Designed an Airbyte, Amazon RDS and BigQuery platform processing millions of events per hour.'
   }
 ];
 
@@ -93,29 +93,27 @@ export type Role = {
 
 export const roles: Role[] = [
   {
-    title: 'Founder & Product Owner',
+    title: 'Technical Contractor / Consultant',
+    company: 'Veriff',
+    where: 'Tallinn',
+    dates: 'Oct 2025 – present',
+    logo: '/images/logos/veriff.png',
+    bullets: [
+      'Own modernisation of the reviewer task-distribution system, from discovery to rollout, improving reliability, maintainability and operational flow.',
+      'Work with engineering and product to turn recurring operational problems into scoped, prioritised improvements.',
+      'Build and review Node.js microservices and GraphQL integrations; improve operational data for prioritisation and production diagnosis.'
+    ]
+  },
+  {
+    title: 'Founder & Technical Co-Founder',
     company: 'Fivexer',
     where: 'formerly Forgemaster AI · Remote',
     dates: 'Oct 2024 – present',
     logo: '/images/logos/fivexer.png',
     bullets: [
-      'Led the pivot from Forgemaster AI to Fivexer when discovery showed the bigger problem: who does the work.',
-      'Own an engine that plans rotas and routes tasks to people or AI agents, with an auditable reason per decision.',
-      'Define REST APIs, JSON schemas and webhook contracts, and review the code.',
-      'Run demos and pricing talks with prospects, feeding findings into the roadmap.'
-    ]
-  },
-  {
-    title: 'Technical Contractor — Product & Platform',
-    company: 'Veriff',
-    where: 'Tallinn',
-    dates: 'Oct 2025 – Sep 2026',
-    logo: '/images/logos/veriff.png',
-    bullets: [
-      'Owned modernisation of the reviewer task-distribution system, from discovery to rollout.',
-      'Specified and reviewed REST/GraphQL contracts and event flows around the decisioning engine.',
-      'Improved operational data so throughput, queues and edge cases are measured.',
-      'Turned recurring compliance-operations pain into scoped, prioritised increments.'
+      'Led the pivot from a knowledge platform for code, documentation and AI assistants to an assignment engine for hybrid human and AI teams, based on customer discovery.',
+      'Own product direction, architecture, full-stack delivery, LLM integrations, Kubernetes infrastructure and operations.',
+      'Turn customer feedback into a prioritised roadmap; build rota planning, skills-based routing and auditable assignment decisions.'
     ]
   },
   {
@@ -125,23 +123,23 @@ export const roles: Role[] = [
     dates: 'Jan – Aug 2024',
     logo: '/images/logos/miros.png',
     bullets: [
-      'Owned technical and product priorities through a growth phase, aligning build with sales.',
-      'Launched an AI search platform that beat Algolia in a customer A/B test and lifted conversion by about 8%.',
-      'Led technical due diligence for a €2.5M funding round.',
-      'Held 99.999% availability for major retail customers while cutting AWS spend.'
+      'Set engineering priorities and ownership during a growth phase, aligning technical and product decisions with company goals.',
+      'Launched the AI e-commerce search platform that delivered approximately 8% higher conversion in a customer A/B test against Algolia.',
+      'Balanced availability, performance and cloud costs; maintained 99.999% availability for major retail customers while reducing AWS spend.',
+      'Led investor technical due diligence for a successful €2.5M funding round.'
     ]
   },
   {
-    title: 'Staff Engineer — Search & Platform',
+    title: 'Staff Engineer',
     company: 'Miros',
     where: 'Estonia',
     dates: 'Mar 2023 – Aug 2024',
     logo: '/images/logos/miros.png',
     bullets: [
-      'Owned search relevance: tokenisation, fuzzy and multilingual matching, ranking.',
-      'Built the measurement platform (millions of events per hour) and its validation SQL.',
-      'Shipped a public GraphQL API for independent customer and team integrations.',
-      'Led the AWS and Kubernetes migration and introduced OpenTelemetry observability.'
+      'Led the AWS migration and platform architecture for an AI product search engine running on Kubernetes.',
+      'Refactored the backend behind a public GraphQL API, enabling product teams to deliver independently.',
+      'Introduced OpenTelemetry observability, production metrics and shared on-call to improve operability.',
+      'Designed an Airbyte, Amazon RDS and BigQuery data platform processing millions of events per hour.'
     ]
   },
   {
@@ -151,9 +149,9 @@ export const roles: Role[] = [
     dates: 'Jan 2022 – Jan 2023',
     logo: '/images/logos/veriff.png',
     bullets: [
-      'Built the rule-driven task-assignment engine routing verification sessions to reviewers under SLA; helped scale it from 10,000 to 700,000+ sessions.',
-      'Designed a unified GraphQL gateway so neighbouring teams shipped independently.',
-      'Led and coached the team; made written proposals and design review the norm.'
+      'Led and developed engineers through 1:1s, direct feedback, mentoring, design reviews and delegated ownership.',
+      'Built the task-assignment engine and helped scale distribution from 10,000 to 700,000+ sessions with sub-second latency.',
+      'Designed a unified GraphQL gateway that decoupled neighbouring teams’ delivery; drove adoption of domain-driven design across engineering.'
     ]
   }
 ];
@@ -163,35 +161,34 @@ export const earlierRoles: { title: string; meta: string; summary: string }[] = 
   {
     title: 'Solutions Architect',
     meta: 'Telia Eesti · 2019 – 2021',
-    summary: 'Provisioning platform for custom MPLS services; IoT architecture for Tartu SmartEnCity.'
+    summary: 'Led IoT architecture for Tartu SmartEnCity; designed, developed and maintained a service delivery orchestration platform for MPLS services, covering IPAM integration, configuration parsing and provisioning.'
   },
   {
     title: 'Founder',
     meta: 'Testreel · 2014 – 2021',
-    summary: 'Ran hiring, delivery, sales and partnerships through a successful exit in 2021.'
+    summary: 'Built and led the company across hiring, delivery, sales, customer relationships and partnerships; delivered multimedia products and exited successfully in 2021.'
   },
   {
-    title: 'Network monitoring → software testing',
+    title: 'Network administrator → QA engineer',
     meta: 'Elion / Telia · 2011 – 2014',
-    summary: 'QA on the Samsung Smart TV app that won the IFA 2012 Innovation award.'
+    summary:
+      'Tested Samsung and LG TV firmware and Telia’s TV application, and was Telia’s technical contact for both partners. The Samsung Smart TV app won the IFA 2012 Innovation award.'
   }
 ];
 
 export const skills: { name: string; list: string }[] = [
-  { name: 'Product management', list: 'Technical discovery, specification writing, roadmap & prioritisation, stakeholder management, pricing & packaging' },
-  { name: 'API & integration design', list: 'REST, GraphQL, JSON Schemas, webhooks, contract & versioning strategy, partner integrations' },
-  { name: 'Matching & detection', list: 'Fuzzy & multilingual matching, tokenisation, relevance ranking, precision/recall trade-offs, Vespa, Qdrant' },
-  { name: 'Rules & decisioning', list: 'Decisioning & routing engines, SLA-driven prioritisation, queue design, human-in-the-loop review' },
-  { name: 'Data & analysis', list: 'SQL, PostgreSQL, BigQuery, Airbyte, A/B testing, product metrics' },
-  { name: 'AI & automation', list: 'LLM workflows, OpenAI, Anthropic, Mistral, vector databases, unstructured data extraction' },
-  { name: 'Engineering fluency', list: 'Node.js, TypeScript, microservices, AWS, Kubernetes, CI/CD, code & schema review' },
-  { name: 'Regulated & client-facing', list: 'KYC / KYB identity verification, telecommunications, technical due diligence, client enablement' }
+  { name: 'People', list: 'Team leadership, hiring, coaching, career development, performance management, direct feedback' },
+  { name: 'Delivery', list: 'Roadmap execution, prioritisation, cross-functional alignment, code and design reviews, CI/CD, GitHub Actions, GitLab CI, A/B testing' },
+  { name: 'Backend & data', list: 'Node.js, TypeScript, distributed systems, microservices, API design, GraphQL, PostgreSQL, Redis, MongoDB, BigQuery, Airbyte' },
+  { name: 'Cloud & operations', list: 'AWS, Kubernetes, Docker, Terraform, Pulumi, on-call, incident response, cost optimisation' },
+  { name: 'Observability', list: 'OpenTelemetry, distributed tracing, Prometheus, Grafana, SigNoz, production metrics and alerting' },
+  { name: 'AI', list: 'LLM applications and workflows, AI assistant integrations, MLOps, OpenAI, Anthropic, vector search' }
 ];
 
 export const principles: { title: string; body: string }[] = [
-  { title: 'Freedom to think', body: 'Room to question the problem and find a better answer — not a backlog to grind through.' },
-  { title: 'Objectives, then results', body: 'A few key objectives everyone understands, followed through to measurable results — OKRs over sprint rituals.' },
-  { title: 'Closest to the user', body: 'I work directly with customers and front-line teams; their problems set the priorities.' }
+  { title: 'Clear context and ownership', body: 'Connect work to customer outcomes and delegate meaningful decisions.' },
+  { title: 'Practical execution', body: 'Make trade-offs visible, plan realistic increments and surface risks early.' },
+  { title: 'Continuous improvement', body: 'Use feedback, design reviews and incident follow-up to improve systems.' }
 ];
 
 export type Project = {

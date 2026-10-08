@@ -14,7 +14,7 @@ import styles from '../styles/cv.module.css';
 const title = `${profile.name} — ${profile.title}`;
 // Kept under ~160 characters so search results show it whole.
 const description =
-  'Senior technical product manager in Estonia for platforms, APIs and AI. Former staff engineer and interim CTO, available for contract and fractional work.';
+  'Engineering leader in Estonia: team lead, staff engineer, interim CTO, founder. Platforms, product delivery and AI. Open to contract and fractional work.';
 const ogImage = `${profile.url}og.png`;
 const ogImageAlt = `${profile.name} — ${profile.title}. Available for contract work.`;
 
@@ -89,10 +89,10 @@ const Home = () => (
       <Image src="/images/viljar.jpg" alt={`Portrait of ${profile.name}`} width={64} height={64} className={styles.portrait} />
       <div className={styles.prose}>
         <p>
-          <strong>Now:</strong> founder &amp; product owner of <a href="https://5xer.com">Fivexer</a> — and open to contract work alongside it.
+          <strong>Now:</strong> founder &amp; technical co-founder of <a href="https://5xer.com">Fivexer</a> — and open to contract work alongside it.
         </p>
         <p>
-          <strong>Next:</strong> a product company with an interesting problem to solve.
+          <strong>Next:</strong> an engineering leadership role in a product company with an interesting problem to solve.
         </p>
       </div>
     </div>
@@ -174,7 +174,7 @@ const Home = () => (
         </div>
         <div className={styles.row}>
           <dt>Languages</dt>
-          <dd>Estonian (native) · English (fluent) · German (basic)</dd>
+          <dd>Estonian (native) · English (proficient) · German (low proficiency)</dd>
         </div>
         <div className={styles.row}>
           <dt>Interests</dt>
